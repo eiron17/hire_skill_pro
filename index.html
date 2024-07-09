@@ -10,119 +10,164 @@
     <!-- Link to Font Awesome CSS file -->
     <link href="fontawesome-free-6.2.0-web/css/all.min.css" rel="stylesheet">
   <style>
-body{
- background: #eee;
+    /* styles.css */
+
+/* Navbar */
+.navbar {
+  transition: background-color 0.3s ease;
 }
 
-#side_nav{
- background: #000;
- min-width: 250px;
- max-width: 250px;
- transition: all 0.3s;
-}
-.content{
-   min-height: 100vh;
-   width: 100%;
-}
-hr.h-color{
-  background: #eee;
+.navbar-brand {
+  font-weight: bold;
 }
 
-.sidebar li.active{
-   background: #eee;
-   border-radius: 8px;
+.navbar-nav .nav-link {
+  padding: 0.5rem 1rem;
 }
 
-.sidebar li.active a, .sidebar li.active a:hover {
- color: #000;
-}
-.sidebar li a{
- color: #fff;
+.navbar-nav .nav-link:hover {
+  color: #007bff;
 }
 
-@media(max-width: 767px){
- #side_nav{
-   margin-left: -250px;
-   position: absolute;
-   min-height: 100vh;
-   z-index: 1;
+/* Hero Section */
+#hero {
+  min-height: 100vh;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("images/b3.jpg") no-repeat center/cover;
+}
 
- }
- #side_nav.active{
-   margin-left: 0;
+/* About Section */
+#about {
+  background-color: #f8f9fa;
+  padding: 4rem 0;
+  min-height: 100vh;
+}
+
+#about h2 {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+#about p {
+  color: #666;
+}
+
+/* Services Section */
+#services {
+  min-height: 100vh;
+  border: 2px solid #ccc;
+  padding: 4rem 0;
+}
+
+#services h2 {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.card {
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-text {
+  color: #666;
+}
+
+/* Contact Section */
+#contact {
+  background-color: #f8f9fa;
+  padding: 4rem 0;
+  min-height: 100vh;
+}
+
+#contact h2 {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+#contact form {
+  margin-bottom: 2rem;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+
+/* Footer */
+footer {
+  min-height: 20vh;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #hero {
+    min-height: 50vh;
   }
 }
+
   </style>
 </head>
 <body>
 
-  <div class="main-container d-flex">
-        <div class="sidebar" id="side_nav">
-            <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
-                <h1 class="fs-4"><span class="bg-white text-dark rounded shadow px-2 me-2">CL</span> <span
-                        class="text-white">Coding League</span></h1>
-                <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i
-                        class="fal fa-stream"></i></button>
-            </div>
-
-            <ul class="list-unstyled px-2">
-                <li class="active"><a href="#" class="text-decoration-none px-3 py-2 d-block"><i
-                            class="fal fa-home"></i> Dashboard</a></li>
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-list"></i>
-                        Projects</a></li>
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between">
-                        <span><i class="fal fa-comment"></i> Messages</span>
-                        <span class="bg-dark rounded-pill text-white py-0 px-2">02</span>
-                    </a>
-                </li>
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i
-                            class="fal fa-envelope-open-text"></i> Services</a></li>
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
-                        Customers</a></li>
-            </ul>
-            <hr class="h-color mx-2">
-
-            <ul class="list-unstyled px-2">
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-bars"></i>
-                        Settings</a></li>
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-bell"></i>
-                        Notifications</a></li>
-
-            </ul>
-
-        </div>
-        <div class="content">
-            <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <div class="container-fluid">
-                    <div class="d-flex justify-content-between d-md-none d-block">
-                     <button class="btn px-1 py-0 open-btn me-2"><i class="fal fa-stream"></i></button>
-                        <a class="navbar-brand fs-4" href="#"><span class="bg-dark rounded px-2 py-0 text-white">CL</span></a>
-                       
-                    </div>
-                    <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fal fa-bars"></i>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                        <ul class="navbar-nav mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Profile</a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </div>
-            </nav>
-
-            <div class="dashboard-content px-3 pt-4">
-                <h2 class="fs-5"> Dashboard</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam? Sequi alias eveniet ut quas
-                    ullam delectus et quasi incidunt rem deserunt asperiores reiciendis assumenda doloremque provident,
-                    dolores aspernatur neque.</p>
-            </div>
-        </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Hire<span class="text-primary">Skill</span>Pro</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard.html">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#services">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3">Sign-Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2">Log-In</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <!-- Hero Section -->
 <section id="hero" class="text-light py-5">
@@ -253,8 +298,6 @@ Freelancer Profiles: Freelancers showcase their skills, experience, and rates, a
     </div>
   </div>
 </section>
-
-<!-- Footer -->
 <!-- Footer -->
 <footer class="bg-dark text-white text-center py-5">
   <div class="container">
@@ -290,8 +333,6 @@ Freelancer Profiles: Freelancers showcase their skills, experience, and rates, a
     </div>
   </div>
 </footer>
-    </div>
-
 
 <form id="signupnreset">
   <!-- Modal -->
@@ -443,24 +484,6 @@ Freelancer Profiles: Freelancers showcase their skills, experience, and rates, a
     </div>
   </div>
   <!-- modal 2 end -->
-
-<script type="module">
- 
-     $(".sidebar ul li").on('click', function () {
-            $(".sidebar ul li.active").removeClass('active');
-            $(this).addClass('active');
-        });
-
-        $('.open-btn').on('click', function () {
-            $('.sidebar').addClass('active');
-
-        });
-
-
-        $('.close-btn').on('click', function () {
-            $('.sidebar').removeClass('active');
-
-        })
  
 </script>
 
