@@ -9,6 +9,7 @@
     <script src="bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
     <!-- Link to Font Awesome CSS file -->
     <link href="fontawesome-free-6.2.0-web/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/fvlogo.png">
   <style>
     /* styles.css */
 
@@ -16,17 +17,24 @@
 .navbar {
   transition: background-color 0.3s ease;
 }
-
 .navbar-brand {
   font-weight: bold;
 }
 
+.navbar-collapse{
+  color:#333; 
+}
 .navbar-nav .nav-link {
   padding: 0.5rem 1rem;
 }
 
 .navbar-nav .nav-link:hover {
   color: #007bff;
+}
+
+.container1{
+  margin: 50px;
+  background-color: rgba(10, 10, 255, 0.037);
 }
 
 /* Hero Section */
@@ -36,7 +44,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("images/b3.jpg") no-repeat center/cover;
+  background: #f8f9fa;
 }
 
 /* About Section */
@@ -129,15 +137,39 @@ footer {
     min-height: 50vh;
   }
 }
+.text-container {
+    width: 60%;
+    margin: auto;
+}
+
+.more-text {
+    display: none;
+}
+
+.read-more-btn {
+    display: block;
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.read-more-btn:hover {
+    background-color: #0056b3;
+}
 
   </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg fw-bold navbar-light bg-light fixed-top border-bottom border-2 p-3">
   <div class="container">
-    <a class="navbar-brand" href="#">Hire<span class="text-primary">Skill</span>Pro</a>
+    <a class="navbar-brand text-dark" href="#"><img src="images/fvlogo.png" alt="Logo" class="logo" height="50" width="auto"> Hire<span class="text-primary">Skill</span>Pro</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -159,10 +191,10 @@ footer {
           <a class="nav-link" href="#contact">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3">Sign-Up</a>
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2">Log-In</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2">Log-In</a>
+          <a class="nav-link text-primary fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3">Sign-Up</a>
         </li>
       </ul>
     </div>
@@ -170,23 +202,38 @@ footer {
 </nav>
 
 <!-- Hero Section -->
-<section id="hero" class="text-light py-5">
-  <div class="container text-center">
-    <h1>Welcome to HireSkillPro!</h1>
-    <p>At HireSkillPro, we connect talented freelancers with businesses that need their skills. Whether you're looking for work or hiring, HireSkillPro makes it easy.</p>
-    <a href="#" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#clientmodalt">hiring employee?</a><a href="#" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#freelancermoodalt">looking do job?</a>
+<section id="hero" class="text-dark py-5">
+  <div class="container1 shadow-sm p-4">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card1">
+          <div class="card-body1">
+            <h1 class="card-title">Welcome to Hire<span class="text-primary">Skill</span>Pro!</h1>
+            <p class="card-text">At HireSkillPro, we connect talented freelancers with businesses that need their skills. Whether you're looking for work or hiring, HireSkillPro makes it easy.</p>
+            <a href="#" class="btn btn-primary fw-bold me-2 m-2" data-bs-toggle="modal" data-bs-target="#exampleModal3">Join Us?</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card1 shadow">
+          <div class="card-body1">
+            <img src="images/b3.jpg" alt="" class="img-fluid rounded">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- About Section -->
 <section id="about" class="py-5">
   <div class="container pt-5">
-    <row class="text-center"><h2>About HireSkillPro</h2></row>
+    <row class="text-center"><h2>About <span class="fw-bold">Hire<span class="text-primary">Skill</span>Pro</span></h2></row>
       <div class="row">
         <div class="col-lg-6">
           <h3 class="card-title">Objective: Empowering Skills, Empowering Success</h3>
           <p class="card-text">At HireSkillPro, our mission is to empower individuals with skills worldwide. We connect skilled freelancers and anyone with talents to businesses that need their expertise. Our platform is user-friendly, making it easy for individuals to showcase their skills and for businesses to find the right talent.</p>
-          <h3 class="card-title">What Makes Us Different</h3>
+          <h3 class="card-title">What Makes Us Different?</h3>
           <p class="card-text">Easy to Use: HireSkillPro makes it simple to hire and collaborate.
 
 Safe and Secure: We prioritize your safety with secure transactions and protecting your information.
@@ -196,6 +243,7 @@ Diverse Talent: Discover experts in many fields ready to assist with your projec
 Always Improving: We continually add new features to enhance our platform.</p>
           <h3 class="card-title">Why Choose HireSkillPro?</h3>
           <p class="card-text">Join our community to explore opportunities and connect with talented individuals. Experience a better way to work with HireSkillPro.</p>
+          <a href="#" class="btn btn-primary fw-bold me-2 m-2" data-bs-toggle="modal" data-bs-target="#exampleModal3">Join Us?</a>
         </div>
         <div class="col-lg-6">
           <img src="images/aboutus.jpg" alt="" class="img-fluid">
@@ -208,63 +256,47 @@ Always Improving: We continually add new features to enhance our platform.</p>
 <section id="services" class="bg-light py-5">
   <div class="container pt-5">
     <h2 class="text-center">Our Services</h2>
-        <div class="row">
+    <div class="row">
       <div class="col-md-12">
         <div class="card shadow">
           <div class="card-body">
-            <h3 class="card-title">HireSkillPro</h3>
-            <p class="card-text">HireSkillPro is your platform for connecting with skilled freelancers and individuals who have valuable skills. Whether you’re looking to hire for a project or showcase your own expertise, we provide the tools and community to make it happen.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-md-6">
-        <div class="card shadow">
-          <div class="card-body">
-            <h3 class="card-title">What We Offer</h3>
-            <p class="card-text">Connecting Talent: Easily find freelancers and skilled individuals across various fields.
-
-Secure Transactions: Ensure safe payments and protect your personal information.
-
-Wide Range of Skills: Discover experts in diverse industries ready to support your projects.
-
-Continuous Improvement: We’re always adding new features to enhance your experience.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card shadow">
-          <div class="card-body">
-            <h3 class="card-title">How It Works:</h3>
-            <p class="card-text">Search and Hire
-
-Find Freelancers: Clients search for freelancers based on skills, experience, and rates to find the perfect match for their projects.
-Project Management Tools
-
-Communication: Use direct messaging to discuss project details and stay connected.
-Time Tracking: Built-in tools help monitor progress and keep track of work hours.
-Work Tracking and Payment
-
-Secure Payment Processing: Encrypted transactions ensure your payments are safe and reliable.
-Time Tracking Program: Transparent payment processes by tracking work hours accurately.
-Feedback and Reviews
-
-Build Reputations: Clients and freelancers leave feedback for each other, helping to build trust and credibility.
-Support
-
-Customer Support: Dedicated support team available to resolve any issues and assist with your needs.
-Profile Management
-
-Freelancer Profiles: Freelancers showcase their skills, experience, and rates, allowing clients to make informed hiring decisions.
-</p>
+            <h3 class="card-title">Hire<span class="text-primary">Skill</span>Pro</h3>
+            <p class="card-text">
+              HireSkillPro is your platform for connecting with skilled freelancers and individuals who have valuable skills. Whether you’re looking to hire for a project or showcase your own expertise, we provide the tools and community to make it happen.
+            </p>
+            <span id="moreText" class="more-text">
+              <h3 class="card-title">What We Offer:</h3>
+              <p class="card-text">
+                Connecting Talent: Easily find freelancers and skilled individuals across various fields.<br>
+                Secure Transactions: Ensure safe payments and protect your personal information.<br>
+                Wide Range of Skills: Discover experts in diverse industries ready to support your projects.<br>
+                Continuous Improvement: We’re always adding new features to enhance your experience.
+              </p>
+              <h3 class="card-title">How It Works:</h3>
+              <p class="card-text">
+                Search and Hire<br>
+                Find Freelancers: Clients search for freelancers based on skills, experience, and rates to find the perfect match for their projects.<br>
+                Project Management Tools<br>
+                Communication: Use direct messaging to discuss project details and stay connected.<br>
+                Time Tracking: Built-in tools help monitor progress and keep track of work hours.<br>
+                Work Tracking and Payment<br>
+                Secure Payment Processing: Encrypted transactions ensure your payments are safe and reliable.<br>
+                Time Tracking Program: Transparent payment processes by tracking work hours accurately.<br>
+                Feedback and Reviews<br>
+                Build Reputations: Clients and freelancers leave feedback for each other, helping to build trust and credibility.<br>
+                Support<br>
+                Customer Support: Dedicated support team available to resolve any issues and assist with your needs.<br>
+                Profile Management<br>
+                Freelancer Profiles: Freelancers showcase their skills, experience, and rates, allowing clients to make informed hiring decisions.
+              </p>
+            </span>
+            <button id="readMoreBtn" class="read-more-btn">Read More</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- Contact Section -->
 <section id="contact" class="py-5">
   <div class="container pt-5">
@@ -485,8 +517,21 @@ Freelancer Profiles: Freelancers showcase their skills, experience, and rates, a
   </div>
   <!-- modal 2 end -->
  
-</script>
 
 </body>
 </html>
+<script>
+document.getElementById('readMoreBtn').addEventListener('click', function() {
+  var moreText = document.getElementById('moreText');
+  var btnText = document.getElementById('readMoreBtn');
+
+  if (moreText.style.display === 'none') {
+      moreText.style.display = 'block';
+      btnText.textContent = 'Read Less';
+  } else {
+      moreText.style.display = 'none';
+      btnText.textContent = 'Read More';
+  }
+});
+</script>
 
