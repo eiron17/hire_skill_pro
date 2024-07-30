@@ -120,7 +120,7 @@ if ($_SESSION['role'] != "Client") {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="findtalent.php">
                                 <i class="fas fa-search"></i> Finding Talent
                             </a>
                         </li>

@@ -14,16 +14,6 @@
         .container {
             margin-top: 20px;
         }
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: none;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        .card img {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
         .btn-primary {
             background-color: #007bff;
             border: none;
@@ -91,20 +81,33 @@
         </form>
     </div>
 
-    <div class="row">
-        <!-- Talent Profile Card -->
-        <div class="col-md-4">
-            <div class="card">
-                <img src="path/to/profile-pic.jpg" class="card-img-top" alt="Talent Profile Picture">
-                <div class="card-body">
-                    <h5 class="card-title">John Doe</h5>
-                    <p class="card-text"><strong>Skills:</strong> Web Development, PHP, JavaScript</p>
-                    <p class="card-text"><strong>Location:</strong> USA</p>
-                    <a href="profile_details.php?id=1" class="btn btn-primary w-100"><i class="fas fa-eye"></i> View Profile</a>
-                </div>
-            </div>
-        </div>
-        <!-- Repeat this card for each talent profile -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Profile Picture</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Skills</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Talent Profile Row -->
+                <tr>
+                    <td>
+                        <img src="path/to/profile-pic.jpg" class="img-fluid rounded-circle" alt="Talent Profile Picture" width="50">
+                    </td>
+                    <td>John Doe</td>
+                    <td>Web Development, PHP, JavaScript</td>
+                    <td>USA</td>
+                    <td>
+                        <a href="profile_details.php?id=1" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View Profile</a>
+                    </td>
+                </tr>
+                <!-- Repeat this row for each talent profile -->
+            </tbody>
+        </table>
     </div>
 </div>
 
