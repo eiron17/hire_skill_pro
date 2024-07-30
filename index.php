@@ -1,341 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HireSkillPro</title>
-    <!-- Link to Bootstrap CSS file -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireSkillPro</title>
     <link href="bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <script src="bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
-    <!-- Link to Font Awesome CSS file -->
     <link href="fontawesome-free-6.2.0-web/css/all.min.css" rel="stylesheet">
+    <link href="css/style-index.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/fvlogo.png">
-  <style>
-    /* styles.css */
-
-/* Navbar */
-.navbar {
-  transition: background-color 0.3s ease;
-}
-.navbar-brand {
-  font-weight: bold;
-}
-
-.navbar-collapse{
-  color:#333; 
-}
-.navbar-nav .nav-link {
-  padding: 0.5rem 1rem;
-}
-
-.navbar-nav .nav-link:hover {
-  color: #007bff;
-}
-
-.container1{
-  margin: 50px;
-  background-color: rgba(10, 10, 255, 0.037);
-}
-
-/* Hero Section */
-#hero {
-  min-height: 100vh;
-  border: 2px solid #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #f8f9fa;
-}
-
-/* About Section */
-#about {
-  background-color: #f8f9fa;
-  padding: 4rem 0;
-  min-height: 100vh;
-}
-
-#about h2 {
-  margin-bottom: 2rem;
-  color: #333;
-}
-
-#about p {
-  color: #666;
-}
-
-/* Services Section */
-#services {
-  min-height: 100vh;
-  border: 2px solid #ccc;
-  padding: 4rem 0;
-}
-
-#services h2 {
-  margin-bottom: 2rem;
-  color: #333;
-}
-
-.card {
-  border: none;
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-}
-
-.card-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.card-text {
-  color: #666;
-}
-
-/* Contact Section */
-#contact {
-  background-color: #f8f9fa;
-  padding: 4rem 0;
-  min-height: 100vh;
-}
-
-#contact h2 {
-  margin-bottom: 2rem;
-  color: #333;
-}
-
-#contact form {
-  margin-bottom: 2rem;
-}
-
-.form-label {
-  font-weight: bold;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-
-
-/* Footer */
-.footer {
-  padding: 60px 10px;
-  background-color: #222;
-  color: #fff;
-}
-
-.footer_top {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 30px;
-}
-
-.footer_top_list {
-  flex: 1;
-  margin: 0 10px;
-  min-width: 200px;
-}
-
-.footer_top_list h5 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.footer_top_list ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer_top_list ul li {
-  margin-bottom: 10px;
-}
-
-.footer_top_list ul li a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer_top_list ul li a:hover {
-  color: #007bff;
-}
-
-.fmid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.fmleft {
-  text-align: center;
-}
-
-.fmlist {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.footer_icons {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #333;
-  transition: background-color 0.3s ease;
-}
-
-.footer_icons i {
-  font-size: 20px;
-  color: #fff;
-}
-
-.footer_icons:hover {
-  background-color: #007bff;
-}
-
-.fbot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.fbot p {
-  margin: 0;
-}
-
-.flist {
-  display: flex;
-  gap: 15px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.flist li a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.flist li a:hover {
-  color: #007bff;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .footer_top {
-    flex-direction: column;
-  }
-
-  .fbot {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-
-/* Responsive */
-@media (max-width: 768px) {
-  #hero {
-    min-height: 50vh;
-  }
-}
-.text-container {
-    width: 60%;
-    margin: auto;
-}
-
-.more-text {
-    display: none;
-}
-
-.read-more-btn {
-    display: block;
-    margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-.read-more-btn:hover {
-    background-color: #0056b3;
-}
-
-
-  </style>
 </head>
 <body>
-
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg fw-bold navbar-light bg-light fixed-top border-bottom border-2 p-3">
-  <div class="container">
-    <a class="navbar-brand text-dark" href="#"><img src="images/fvlogo.png" alt="Logo" class="logo" height="50" width="auto"> Hire<span class="text-primary">Skill</span>Pro</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="dashboard.php">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#services">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2">Log-In</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-primary fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3">Sign-Up</a>
-        </li>
-      </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border p-2 fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand ms-5" href="#">
+            <img src="images/fvlogo.png" alt="Logo" class="logo" height="50" width="auto"> <span class="fw-bold">Hire<span class="text-primary">Skill</span>Pro</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#freelancermodalt">Find Work</a>
+					</li>	
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#clientmodalt">Find Talent</a>
+					</li>	
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#faq">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact Us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-primary me-2 d-none d-lg-block" href="login.php">Log In</a>
+                </li>
+                <li class="nav-item me-5">
+                    <a class="btn btn-primary d-none d-lg-block" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3">Register</a>
+                </li>
+                <!-- Mobile Buttons -->
+                <li class="nav-item d-lg-none mt-2">
+                    <a class="btn btn-primary d-block w-25" href="#">Log In</a>
+                </li>
+                <li class="nav-item d-lg-none mt-2">
+                    <a class="btn btn-primary d-block w-25" href="#">Register</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
+<span id="notifforadd"></span>
 <!-- Hero Section -->
-<section id="hero" class="text-dark py-5">
-  <div class="container1 shadow-sm p-4">
-  <span id="notifforadd"></span>
+<section id="hero" class="text-dark bg-light py-5 mt-5 ">
+  <div class="container1 p-4 text-center">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="card1">
           <div class="card-body1">
             <h1 class="card-title">Welcome to Hire<span class="text-primary">Skill</span>Pro!</h1>
             <p class="card-text">At HireSkillPro, we connect talented freelancers with businesses that need their skills. Whether you're looking for work or hiring, HireSkillPro makes it easy.</p>
             <a href="#" class="btn btn-primary fw-bold me-2 m-2" data-bs-toggle="modal" data-bs-target="#exampleModal3">Join Us?</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card1 shadow">
-          <div class="card-body1">
-            <img src="images/b3.jpg" alt="" class="img-fluid rounded">
           </div>
         </div>
       </div>
@@ -346,8 +82,8 @@
 <!-- About Section -->
 <section id="about" class="py-5">
   <div class="container pt-5">
-    <row class="text-center"><h2>About <span class="fw-bold">Hire<span class="text-primary">Skill</span>Pro</span></h2></row>
-      <div class="row">
+    <row class="text-center"><h2>About <span class="">Hire<span class="text-primary">Skill</span>Pro</span></h2></row>
+      <div class="row mt-4">
         <div class="col-lg-6">
           <h3 class="card-title">Objective: Empowering Skills, Empowering Success</h3>
           <p class="card-text">At HireSkillPro, our mission is to empower individuals with skills worldwide. We connect skilled freelancers and anyone with talents to businesses that need their expertise. Our platform is user-friendly, making it easy for individuals to showcase their skills and for businesses to find the right talent.</p>
@@ -369,12 +105,11 @@ Always Improving: We continually add new features to enhance our platform.</p>
       </div>
   </div>
 </section>
-
 <!-- Services Section -->
 <section id="services" class="bg-light py-5">
   <div class="container pt-5">
     <h2 class="text-center">Our Services</h2>
-    <div class="row">
+    <div class="row mt-4">
       <div class="col-md-12">
         <div class="card shadow">
           <div class="card-body">
@@ -382,7 +117,7 @@ Always Improving: We continually add new features to enhance our platform.</p>
             <p class="card-text">
               HireSkillPro is your platform for connecting with skilled freelancers and individuals who have valuable skills. Whether you’re looking to hire for a project or showcase your own expertise, we provide the tools and community to make it happen.
             </p>
-            <span id="moreText" class="more-text">
+            <span id="moreText" class="more-text" style="display: none;">
               <h3 class="card-title">What We Offer:</h3>
               <p class="card-text">
                 Connecting Talent: Easily find freelancers and skilled individuals across various fields.<br>
@@ -408,110 +143,160 @@ Always Improving: We continually add new features to enhance our platform.</p>
                 Freelancer Profiles: Freelancers showcase their skills, experience, and rates, allowing clients to make informed hiring decisions.
               </p>
             </span>
-            <button id="readMoreBtn" class="read-more-btn">Read More</button>
+            <button id="readMoreBtn" class="read-more-btn btn btn-primary">Read More</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- Contact Section -->
-<section id="contact" class="py-5">
-  <div class="container pt-5">
-    <h2 class="text-center">Contact Us</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <form id="contactreset">
-          <div class="mb-3">
-            <label for="name" class="form-label">Your Name</label>
-            <input type="text" class="form-control" id="name" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Your Email</label>
-            <input type="email" class="form-control" id="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" rows="3" required></textarea>
-          </div>
-          <button type="button" id="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-      <div class="col-md-6">
-        <div class="bg-primary text-white p-4">
-          <h3>Contact Information</h3>
-          <p>Address: Pinagkawitan, Lipa City, Batangas</p>
-          <p>Website:<span?><a href="HireSkillPro.online" class="text-light"> HireSkillPro.online</a></span></p>
-          <p>Phone: 09686299932</p>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-5">
+        <div class="container pt-5">
+            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqHeadingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                            What is HireSkillPro?
+                        </button>
+                    </h2>
+                    <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            HireSkillPro is a platform that connects skilled professionals with top employers. We provide a secure and efficient way to find and offer services.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqHeadingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                            How do I create an account?
+                        </button>
+                    </h2>
+                    <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            You can create an account by clicking on the Sign Up link and filling in the required information. It's quick and easy!
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqHeadingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                            Is there a fee to use HireSkillPro?
+                        </button>
+                    </h2>
+                    <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Signing up and creating a profile on HireSkillPro is free. We charge a small commission on successful transactions to maintain our platform.
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Footer -->
-<!-- Footer -->
-<footer class="footer bg-dark text-white">
-  <div class="container">
-    <div class="footer_top">
-      <div class="footer_top_list">
-        <h5>For Clients</h5>
-        <ul>
-          <li><a href="#">How to Hire</a></li>
-          <li><a href="#">Talent Marketplace</a></li>
-          <li><a href="#">Direct Contracts</a></li>
-          <li><a href="#">Hire Worldwide</a></li>
-        </ul>
-      </div>
-      <div class="footer_top_list">
-        <h5>For Talent</h5>
-        <ul>
-          <li><a href="#">How to Find Work</a></li>
-          <li><a href="#">Direct Contracts</a></li>
-          <li><a href="#">Find Freelance Jobs Worldwide</a></li>
-        </ul>
-      </div>
-      <div class="footer_top_list">
-        <h5>Resources</h5>
-        <ul>
-          <li><a href="#">Help & Support</a></li>
-          <li><a href="#">HireSkillPro Reviews</a></li>
-          <li><a href="#">Community</a></li>
-          <li><a href="#">Free Business Tools</a></li>
-        </ul>
-      </div>
-      <div class="footer_top_list">
-        <h5>Company</h5>
-        <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Trust, Safety & Security</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="fmid">
-      <div class="fmleft">
-        <h5>Follow Us</h5>
-        <div class="fmlist">
-          <a href="#" class="footer_icons"><i class="fab fa-facebook"></i></a>
-          <a href="#" class="footer_icons"><i class="fab fa-linkedin"></i></a>
-          <a href="#" class="footer_icons"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="footer_icons"><i class="fab fa-instagram"></i></a>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="bg-light py-5">
+        <div class="container pt-5">
+            <h2 class="text-center mb-4">Contact Us</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form>
+                        <div class="mb-3">
+                            <label for="contactName" class="form-label">Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="contactNameIcon"><i class="fas fa-user"></i></span>
+                                <input type="text" class="form-control" id="contactname" placeholder="Enter your full name">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactEmail" class="form-label">Email address</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="contactEmailIcon"><i class="fas fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="contactemail" placeholder="Enter your email">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactMessage" class="form-label">Message</label>
+                            <textarea class="form-control" id="contactmessage" rows="4" placeholder="Enter your message"></textarea>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="contactus()">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+    <!-- Footer Section -->
+    <footer class="bg-light text-dark pt-5 pb-4 border-top border-2">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #007bff;">About Us</h5>
+                <hr class="mb-4">
+                <p>At HireSkillPro, we connect talented freelancers with businesses that need their skills. Whether you're looking for work or hiring, HireSkillPro makes it easy.</p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #007bff;">For Clients</h5>
+                <hr class="mb-4">
+                <p><a href="#" class="text-dark" style="text-decoration:none">Hire a Worker</a></p>
+                <p><a href="#" class="text-dark" style="text-decoration:none">Post a Job</a></p>
+                <p><a href="#" class="text-dark" style="text-decoration:none">Talent Marketplace</a></p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #007bff;">For Talent</h5>
+                <hr class="mb-4">
+                <p><a href="#" class="text-dark" style="text-decoration:none">How to Work</a></p>
+                <p><a href="#" class="text-dark" style="text-decoration:none">Find Work Jobs Worldwide</a></p>
+                <p><a href="#" class="text-dark" style="text-decoration:none">Direct Contracts</a></p>
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #007bff;">Contact</h5>
+                <hr class="mb-4">
+                <p><i class="fas fa-home mr-3"></i> Lipa City, Batangas</p>
+                <p><i class="fas fa-envelope mr-3"></i> hireskillpro.com</p>
+                <p><i class="fas fa-phone mr-3"></i> +63 09000000000</p>
+                <p><i class="fas fa-print mr-3"></i> +63 09000000000</p>
+            </div>
+			
+
+        </div>
+        <div class="row mt-4">
+            <div class="col text-center">
+                <p>
+                    Copyright 2024 All Rights Reserved By:
+                    <a href="#" style="text-decoration:none; color: #007bff;">
+                        <strong>Hire Skill Pro INC.</strong>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <!-- Feedback Button -->
+        <div id="feedback-button" onclick="openFeedbackForm()">
+            Feedback
+        </div>
+
+        <!-- Feedback Form -->
+        <div id="feedback-form">
+            <div class="form-content">
+            <span class="close-btn" onclick="closeFeedbackForm()">&times;</span>
+            <h2>Feedback</h2>
+            <form>
+                <textarea placeholder="Your feedback..." rows="5" id="feedbackbox"></textarea>
+                <button type="button" onclick=" webfeedback()" >Submit</button>
+            </form>
+            </div>
+        </div>
     </div>
-    <div class="fbot">
-      <p>2024 HireSkillPro Inc.</p>
-      <ul class="flist">
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Cookie Settings</a></li>
-        <li><a href="#">Accessibility</a></li>
-      </ul>
-    </div>
-  </div>
 </footer>
 
+    <script src="bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
 
 <form id="signupnreset">
   <!-- Modal -->
@@ -545,13 +330,13 @@ Always Improving: We continually add new features to enhance our platform.</p>
   <!-- modal end-->
   </form>
 
-  <form id="signup">
+<form id="signup">
   <!-- Modal -->
   <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Join as a client or freelancer</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Join as a Client or Talent</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center">
@@ -566,7 +351,7 @@ Always Improving: We continually add new features to enhance our platform.</p>
             <div class="col-md-6">
               <div class="border border-primary p-4 m-4">
                 <h1 class="text-primary"><i class="fa-solid fa-user"></i></h1>
-                <a href="#" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#freelancermodalt">Sign-Up as Freelacer?</a>
+                <a href="#" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#freelancermodalt">Sign-Up as Talent?</a>
               </div>
             </div>
           </div>
@@ -579,13 +364,13 @@ Always Improving: We continually add new features to enhance our platform.</p>
     </div>
   </div>
   <!-- modal end-->
-  </form>
+</form>
 
   <!-- Client Signup Form -->
   <form id="clientmodal">
   <!-- Modal -->
   <div class="modal fade" id="clientmodalt" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Sign-Up as Client</h5>
@@ -616,71 +401,42 @@ Always Improving: We continually add new features to enhance our platform.</p>
 <form id="freelancermodal">
   <!-- Modal -->
   <div class="modal fade" id="freelancermodalt" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Sign-Up as Freelancer</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Sign-Up as Talent</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="mb-3">
                 <label class="form-label">First Name :</label>
-                <input type="text" class="form-control" id="ffname" name="fname" required>
+                <input type="text" class="form-control" id="sfname" name="sfname" required>
                 <label class="form-label">Last Name :</label>
-                <input type="text" class="form-control" id="flname" name="lname" required>
+                <input type="text" class="form-control" id="slname" name="slname" required>
                 <label class="form-label">Email :</label>
-                <input type="email" class="form-control" id="fsemail" name="semail" required autocomplete="username">
+                <input type="email" class="form-control" id="fsemail" name="fsemail" required autocomplete="username">
                 <label class="form-label">Password :</label>
-                <input type="password" class="form-control" id="fpass" name="pass" required autocomplete="new-password">
-                <label class="form-label">Confirm Password :</label>
-                <input type="password" class="form-control" id="fconp" name="conp" required autocomplete="new-password">
+                <input type="password" class="form-control" id="spass" name="spass" required autocomplete="new-password">
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" id="savefreelancer" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="savefreelancer" onclick="freelancersignin()" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          <button type="submit" class="btn btn-secondary" onclick="webfeedback()" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
 </form>
 
-  
-  <form id="loginform">
-  <!-- Modal 2 -->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Log-in</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="mb-3">
-                <label class="form-label">Email :</label>
-                <input type="text" class="form-control" id="lemail" name="lemail" required autocomplete="username">
-                <label class="form-label">Password :</label>
-               <input type="password" class="form-control" id="lpass" name="lpass" required autocomplete="current-password">
-            </div>
-        </div>
-          <div class="modal-footer">
-            <button type="button" id="loginu" class="btn btn-primary">Log-in</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          </div>
-      </div>
-    </div>
-  </div>
-  <!-- modal 2 end -->
- 
-
 </body>
+
 </html>
 <script>
 document.getElementById('readMoreBtn').addEventListener('click', function() {
   var moreText = document.getElementById('moreText');
   var btnText = document.getElementById('readMoreBtn');
 
-  if (moreText.style.display === 'none') {
+  if (moreText.style.display === 'none' || moreText.style.display === '') {
       moreText.style.display = 'block';
       btnText.textContent = 'Read Less';
   } else {
@@ -688,6 +444,15 @@ document.getElementById('readMoreBtn').addEventListener('click', function() {
       btnText.textContent = 'Read More';
   }
 });
+function openFeedbackForm() {
+	document.getElementById('feedback-form').style.display = 'block';
+	document.getElementById('feedback-button').style.display = 'none';
+}
+
+function closeFeedbackForm() {
+	document.getElementById('feedback-form').style.display = 'none';
+	document.getElementById('feedback-button').style.display = 'block';
+}
 
 function clientsignin() {
     var cfname = document.getElementById("cfname").value;
@@ -721,6 +486,91 @@ function resetClientForm() {
     document.getElementById("csemail").value = '';
     document.getElementById("cpass").value = '';
 }
+
+function freelancersignin() {
+    var sfname = document.getElementById("sfname").value;
+    var slname = document.getElementById("slname").value;
+    var fsemail = document.getElementById("fsemail").value;
+    var spass = document.getElementById("spass").value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("notifforadd").innerHTML = this.responseText;
+            // Reset form fields
+            resetfreeForm();
+            // Close modal after a delay
+            setTimeout(closealert, 2000);
+            function closealert() {
+                var btnclose = document.getElementById("btnclose");
+                if (btnclose) {
+                    btnclose.click();
+                }
+            }
+        }
+    };
+    xhttp.open("GET", "ajax/freelancersignin.php?sfname=" + sfname + "&&slname=" + slname + "&&fsemail=" + fsemail + "&&spass=" + spass, true);
+    xhttp.send();
+}
+
+// Function to reset client sign-up form fields
+function resetfreeForm() {
+    document.getElementById("sfname").value = '';
+    document.getElementById("slname").value = '';
+    document.getElementById("fsemail").value = '';
+    document.getElementById("spass").value = '';
+}
+
+function contactus() {
+    var contactname = document.getElementById("contactname").value;
+    var contactemail = document.getElementById("contactemail").value;
+    var contactmessage = document.getElementById("contactmessage").value;
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("notifforadd").innerHTML = this.responseText;
+            // Reset form fields
+            resetconusForm();
+            // Close modal after a delay
+            setTimeout(closealert, 2000);
+            function closealert() {
+                var btnclose = document.getElementById("btnclose");
+                if (btnclose) {
+                    btnclose.click();
+                }
+            }
+        }
+    };
+    xhttp.open("GET", "ajax/contactus-ajax.php?contactname=" + contactname + "&contactemail=" + contactemail + "&contactmessage=" + contactmessage, true);
+    xhttp.send();
+}
+// Function to reset client sign-up form fields
+function resetconusForm() {
+    document.getElementById("contactname").value = '';
+    document.getElementById("contactemail").value = '';
+    document.getElementById("contactmessage").value = '';
+}
+
+function webfeedback() {
+    var feedbackbox = document.getElementById("feedbackbox").value;
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("notifforadd").innerHTML = this.responseText;
+            // Reset form fields
+            closeFeedbackForm();
+            // Close modal after a delay
+            setTimeout(closealert, 2000);
+            function closealert() {
+                var btnclose = document.getElementById("btnclose");
+                if (btnclose) {
+                    btnclose.click();
+                }
+            }
+        }
+    };
+    xhttp.open("GET", "ajax/web-feedback.php?feedbackbox=" + feedbackbox, true);
+    xhttp.send();
+}
 </script>
-
-

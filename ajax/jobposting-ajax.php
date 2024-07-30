@@ -1,12 +1,13 @@
-
 <?php
-$cfname=$_GET['cfname'];
-$clname=$_GET['clname'];
-$csemail=$_GET['csemail'];
-$cpass=$_GET['cpass'];
+$jobTitle=$_GET['jobTitle'];
+$jobnature=$_GET['jobnature'];
+$jobDescription=$_GET['jobDescription'];
+$qualifications=$_GET['qualifications'];
+$payment=$_GET['payment'];
+$jobterm=$_GET['jobterm'];
 include_once '../Class/User.php';
 $u= new User();
-echo $u->clientsn($cfname,$clname,$csemail,$cpass);
+echo $u->jobpostingc($jobTitle,$jobnature,$jobDescription,$qualifications,$payment,$jobterm);
 ?>
 <div class="row justify-content-center pos">
     <div class="col-md-3 text-center">
@@ -16,4 +17,3 @@ echo $u->clientsn($cfname,$clname,$csemail,$cpass);
         </div>
     </div>
 </div>
-

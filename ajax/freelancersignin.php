@@ -1,12 +1,11 @@
-
 <?php
-$cfname=$_GET['cfname'];
-$clname=$_GET['clname'];
-$csemail=$_GET['csemail'];
-$cpass=$_GET['cpass'];
+$sfname=$_GET['sfname'];
+$slname=$_GET['slname'];
+$fsemail=$_GET['fsemail'];
+$spass=$_GET['spass'];
 include_once '../Class/User.php';
 $u= new User();
-echo $u->clientsn($cfname,$clname,$csemail,$cpass);
+echo $u->freelancersn($sfname,$slname,$fsemail,$spass);
 ?>
 <div class="row justify-content-center pos">
     <div class="col-md-3 text-center">
@@ -16,4 +15,3 @@ echo $u->clientsn($cfname,$clname,$csemail,$cpass);
         </div>
     </div>
 </div>
-

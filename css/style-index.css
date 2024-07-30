@@ -1,0 +1,74 @@
+/* Feedback Button */
+#feedback-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Feedback Form */
+  #feedback-form {
+    display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  #feedback-form .form-content {
+    padding: 20px;
+    position: relative;
+  }
+
+  #feedback-form .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  #feedback-form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  #feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  #feedback-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #feedback-form button:hover {
+    background-color: #0056b3;
+  }
+  .pos {
+    position: fixed;
+    width: 100%;
+    top: 40%;
+    z-index: 9999; /* A high value to ensure it is in front */
+    display: flex;
+    justify-content: center; /* Center the notification horizontally */
+}

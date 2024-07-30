@@ -1,0 +1,58 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.login-card {
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.login-card .card-body {
+    padding: 2rem;
+}
+
+.login-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.login-card .form-label {
+    font-weight: bold;
+    color: #343a40;
+}
+
+.login-card .input-group-text {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.login-card .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.login-card .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.login-card .text-center a {
+    color: #007bff;
+}
+
+.login-card .text-center a:hover {
+    color: #0056b3;
+}
+
+.login-card .card-footer {
+    background-color: #f8f9fa;
+    border-top: 0;
+    padding: 1rem 2rem;
+}
+.pos{
+    position:fixed;
+    width:100%;
+    top:40%;
+    z-index: 2;
+  }
