@@ -253,56 +253,98 @@ function resetfreeForm() {
 
 include_once 'Class/User.php';
 
-if(isset($_POST['btnlogin'])){
+if (isset($_POST['btnlogin'])) {
     $un = $_POST['username'];
     $pw = $_POST['password'];
     $u = new User();
     $data = $u->login($un, $pw);
-    if($row = $data->fetch_assoc()){
+    
+    if ($row = $data->fetch_assoc()) {
         $_SESSION['role'] = $row['role'];
         $_SESSION['idn'] = $row['idnumber'];
         $_SESSION['status'] = $row['status'];
-        if ($row['role'] == 'Admin'){
-            echo '
-            <script>
-                window.open("admin/adminpage.php","_self");
-            </script>
-            ';
-        } else if ($row['role'] == 'Client') {
-            if($row['status'] == '1'){
+        
+        switch ($row['role']) {
+            case 'Admin':
                 echo '
                 <script>
-                    window.open("forclient/client.php","_self");
+                    window.open("admin/adminpage.php", "_self");
                 </script>
                 ';
-            } else {
+                break;
+                
+            case 'Client2':
+                if ($row['status'] == '1') {
+                    echo '
+                    <script>
+                        window.open("forclient/client.php", "_self");
+                    </script>
+                    ';
+                } else {
+                    echo '
+                    <script>
+                        alert("ACCESS TO THIS ACCOUNT IS DENIED");
+                    </script>
+                    ';
+                }
+                break;
+
+            case 'Client':
+                if ($row['status'] == '1') {
+                    echo '
+                    <script>
+                        window.open("forclient/clientsetupprofile.php", "_self");
+                    </script>
+                    ';
+                } else {
+                    echo '
+                    <script>
+                        alert("ACCESS TO THIS ACCOUNT IS DENIED");
+                    </script>
+                    ';
+                }
+                break;
+                
+            case 'Talent':
+                if ($row['status'] == '1') {
+                    echo '
+                    <script>
+                        window.open("fortalent/talent.php", "_self");
+                    </script>
+                    ';
+                } else {
+                    echo '
+                    <script>
+                        alert("ACCESS TO THIS ACCOUNT IS DENIED");
+                    </script>
+                    ';
+                }
+                break;
+
+            case 'Freelancer':
+                if ($row['status'] == '1') {
+                    echo '
+                    <script>
+                        window.open("fortalent/profile_setup.php", "_self");
+                    </script>
+                    ';
+                } else {
+                    echo '
+                    <script>
+                        alert("ACCESS TO THIS ACCOUNT IS DENIED");
+                    </script>
+                    ';
+                }
+                break;
+
+            default:
                 echo '
                 <script>
                     alert("ACCESS TO THIS ACCOUNT IS DENIED");
                 </script>
                 ';
-            }
-        } else if ($row['role'] == 'Freelancer') {
-            if($row['status'] == '1'){
-                echo '
-                <script>
-                    window.open("fortalent/talent.php","_self");
-                </script>
-                ';
-            } else {
-                echo '
-                <script>
-                    alert("ACCESS TO THIS ACCOUNT IS DENIED");
-                </script>
-                ';
-            }
-        } else {
-            echo '
-            <script>
-                alert("ACCESS TO THIS ACCOUNT IS DENIED");
-            </script>
-            ';
-        } 
+                break;
+        }
     } else {
         echo '
         <script>
@@ -312,3 +354,4 @@ if(isset($_POST['btnlogin'])){
     }
 }
 ?>
+

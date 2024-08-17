@@ -22,14 +22,8 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">Home</a>
                 </li>
-                <li class="nav-item">
-						<a class="nav-link" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#freelancermodalt">Find Work</a>
-					</li>	
-					<li class="nav-item">
-						<a class="nav-link" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#clientmodalt">Find Talent</a>
-					</li>	
                 <li class="nav-item">
                     <a class="nav-link" href="#about">About Us</a>
                 </li>

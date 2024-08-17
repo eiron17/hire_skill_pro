@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['idn'])) {
+    header('location:../logout.php');
+}
+if ($_SESSION['role'] != "Talent") {
+    header('location:../index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

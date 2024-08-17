@@ -1,3 +1,34 @@
+<?php
+session_start();
+if (!isset($_SESSION['idn'])) {
+    header('location:../logout.php');
+}
+if ($_SESSION['role'] != "Talent") {
+    header('location:../index.php');
+}
+
+include_once '../Class/User.php';
+$u = new User();
+$uid=$_SESSION['idn'];
+$myprofile = $u->myprofile($uid); 
+   while($row = $myprofile->fetch_assoc()){
+    $profilephoto = $row['profile_photo'];
+    $gfname = $row['fname'];
+   $gmname = $row['mname'];
+   $glname = $row['lname'];
+   $ggender = $row['gender'];
+   $gcontact = $row['contact_no'];
+   $gaddress = $row['address'];
+   $gmh = $row['employment_history'];
+   $gedu= $row['education'];
+   $gskill = $row['skills'];
+   $ghr = $row['hourly_rate'];
+   $gavail = $row['availability'];
+   $gloc = $row['location'];
+   $glang = $row['languages'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,9 +82,108 @@
             color: #003366;
             cursor: pointer;
         }
+        .pos {
+    position: fixed;
+    width: 100%;
+    top: 40%;
+    z-index: 9999; /* A high value to ensure it is in front */
+    display: flex;
+    justify-content: center; /* Center the notification horizontally */
+}  
+.fade-out {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.fade-out.hide {
+    opacity: 0;
+}
     </style>
 </head>
-<body>
+<body onload="displayjobs()">
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profileModalLabel">Profile Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php if (!empty($errorMessage)): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $errorMessage ?>
+                </div>
+                <?php endif; ?>
+
+                <!-- Resume Style Content -->
+                <div class="resume-container">
+                <input type="hidden" id="jobid">
+                <input type="hidden" id="clientid">
+                <input type="hidden" id="uidd" value="<?=trim($_SESSION['idn'])?>">
+                    <div class="resume-header text-center mb-4">
+                    <img src="<?= '../images/' . $profilephoto ?>" alt="Profile Photo" class="img-fluid rounded-circle mb-3" style="width: 100px;">
+
+                        <h4><?= $gfname ?> <?= $glname ?></h4>
+                        <p><?= $ggender ?></p>
+                    </div>
+
+                    <div class="contact-info resume-section mb-4">
+                        <h5>Contact</h5>
+                        <p><i class="fas fa-phone"></i> <?= $gcontact ?></p>
+                        <p><i class="fas fa-map-marker-alt"></i> <?= $gaddress ?></p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="education resume-section mb-4">
+                                <h5>Educational History</h5>
+                                <p><?= $gedu ?></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="experience resume-section mb-4">
+                                <h5>Employment History</h5>
+                                <p><?= $gmh ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="skills resume-section mb-4">
+                                <h5>Skills</h5>
+                                <p><?= $gskill ?></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="availability resume-section mb-4">
+                                <h5>Availability</h5>
+                                <p><?= $gavail ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="hourly-rate resume-section mb-4">
+                                <h5>Hourly Rate</h5>
+                                <p><?= $ghr ?></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="languages resume-section mb-4">
+                                <h5>Languages</h5>
+                                <p><?= $glang ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="sutapply" onclick="applysubmit()" name="submitapply" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+        </div>
+    </div>
+</div>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
@@ -72,7 +202,7 @@
             </div>
         </div>
     </nav>
-
+            <span id="notifforadd"></span>
     <!-- Main Content -->
     <div class="container-fluid mt-4">
         <div class="row">
@@ -82,8 +212,8 @@
                     <h1><i class="fa-solid fa-arrow-right sidebar-toggle-icon d-md-none" id="sidebarToggle"></i></h1>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            <a class="nav-link" href="sbprofile.php">
+                                <i class="fas fa-user-cog"></i> Profile Management
                             </a>
                         </li>
                         <li class="nav-item">
@@ -97,11 +227,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="sbfeedback.php">
-                                <i class="fas fa-comments"></i> Feedback
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="sbexam.php">
                                 <i class="fas fa-clipboard-list"></i> Exam Management
                             </a>
@@ -109,11 +234,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="sbpmethod.php">
                                 <i class="fas fa-money-bill-wave"></i> Payment Management
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sbprofile.php">
-                                <i class="fas fa-user-cog"></i> Profile Management
                             </a>
                         </li>
                     </ul>
@@ -125,19 +245,10 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Talent Dashboard</h1>
                 </div>
-
                 <div class="row">
                     <!-- Current Jobs -->
-                    <div class="col-12 mb-4">
-                        <div class="card border-primary">
-                            <div class="card-header bg-primary text-white">
-                                <h5>Current Jobs</h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">No current jobs available.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="response">
+                                    </div>
                     
                     <!-- Add more cards or content as needed -->
                 </div>
@@ -151,6 +262,60 @@
             var sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('collapsed');
         });
+
+        function displayjobs(){    
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200){
+                document.getElementById("response").innerHTML = this.responseText;
+                  new DataTable('#tbl',{
+                    scrollCollapse: true,
+                    scrollY: '50vh'
+                  });
+                //alert(this.responseText);
+            }
+        };
+        xhttp.open("GET", "../ajax/diplayjob.php?", true);
+        xhttp.send();
+        }
+
+        function showdetails(jobid, clientid){
+      document.getElementById("jobid").value = jobid;
+      document.getElementById("clientid").value = clientid;
+   }
+
+   function applysubmit(){
+    var jobid = document.getElementById("jobid").value;
+    var clientid = document.getElementById("clientid").value;
+    var uidd = document.getElementById("uidd").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("notifforadd").innerHTML = this.responseText;
+
+            // Apply fade-out effect after 2 seconds
+            setTimeout(function() {
+                var notif = document.querySelector("#notifforadd .alert");
+                if (notif) {
+                    notif.classList.add("fade-out");
+                    // Remove the notification from the DOM after the fade-out animation
+                    setTimeout(function() {
+                        notif.remove();
+                    }, 1000); // Matches the CSS transition duration
+                }
+            }, 2000);
+        }
+    }
+    xhttp.open("GET", "../ajax/applyt.php?jobid=" + jobid + "&clientid=" + clientid + "&uidd=" + uidd, true);
+    xhttp.send();
+}
     </script>
+</div>
+
+
+
+</div>
 </body>
+
 </html>
