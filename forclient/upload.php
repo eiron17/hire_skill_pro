@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once '../Class/User.php';
 if(isset($_POST['submit'])){
     $cidn = $_POST['erp'];
