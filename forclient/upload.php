@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once '../Class/User.php';
+include_once '../Class copy/User.php';
 if(isset($_POST['submit'])){
     $cidn = $_POST['erp'];
     $fname = $_POST['fname'];
@@ -17,7 +17,7 @@ if(isset($_POST['submit'])){
     $fileSize = $_FILES['file']['size'];
     $fileError = $_FILES['file']['error'];
     $fileType = $_FILES['file']['type'];
-
+ 
     $fileExt = explode('.',$fileName);
     $fileActualExt = strtolower(end($fileExt));
 
@@ -25,7 +25,7 @@ if(isset($_POST['submit'])){
 
     if (in_array($fileActualExt, $allowed)){
         if ($fileError === 0){
-            if($fileSize < 1000000){
+            if($fileSize < 10000000){
                 $fileNameNew = uniqid('', true).".".$fileActualExt;
                 $fileDestination = '../images/'.$fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
