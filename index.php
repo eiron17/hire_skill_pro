@@ -48,10 +48,10 @@
                 </li>
                 <!-- Mobile Buttons -->
                 <li class="nav-item d-lg-none mt-2">
-                    <a class="btn btn-primary d-block w-25" href="#">Log In</a>
+                    <a class="btn btn-primary d-block w-25" href="login.php">Log In</a>
                 </li>
                 <li class="nav-item d-lg-none mt-2">
-                    <a class="btn btn-primary d-block w-25" href="#">Register</a>
+                    <a class="btn btn-primary d-block w-25" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3">Register</a>
                 </li>
             </ul>
         </div>
