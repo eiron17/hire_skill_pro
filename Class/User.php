@@ -107,10 +107,11 @@ Class User extends Databases{
         }
 
         public function displayjob() {
-            $sql = "SELECT * FROM tblposting where status='open'";
+            $sql = "SELECT * FROM tblposting WHERE status='open'";
             $data = $this->conn->query($sql);
             return $data;
         }
+        
 
         /* set up profile talent */
         public function setupprot($ttid,$tprofile_photo, $tfname, $tmname, $tlname, $tgender, $tcontact_number, $taddress,$temployment_history,$teducation,$tskills,$thourly_rate,$tavailability,$tlocation,$tlanguages){
@@ -161,6 +162,12 @@ Class User extends Databases{
 
         public function myprofile($uid){
             $sql = "SELECT * FROM tblinfo WHERE idnumber='$uid'";
+            $data = $this->conn->query($sql);
+            return $data;
+        }
+
+        public function tviewjobdeatils($jobid){
+            $sql = "SELECT * FROM tblposting where id='$jobid'";
             $data = $this->conn->query($sql);
             return $data;
         }
@@ -310,18 +317,27 @@ Class User extends Databases{
             $data2 = $this->conn->query($sql);
             return $data2;
         }
-        public function displayinprogressjob($cid){
-            $sql ="
-            SELECT p.*, COUNT(a.job_id) AS applicant_count 
-            FROM tblposting p
-            LEFT JOIN tblapply a ON p.id = a.job_id 
-            WHERE p.client_idnumber = '$cid' 
-            AND p.status = 'inprogress'
-            GROUP BY p.id  
-            ";
+        public function displayinprogressjob($cid) {
+            $sql = "
+     SELECT p.*, 
+       i.idnumber AS talent_id,
+       i.fname AS hired_fname,
+       i.lname AS hired_lname
+        FROM tblposting p
+        LEFT JOIN tblapply a ON p.id = a.job_id 
+        LEFT JOIN tblinfo i ON a.talent_id = i.idnumber 
+        WHERE p.client_idnumber = '$cid' 
+        AND p.status = 'inprogress'
+        AND i.status = 'hired'
+        GROUP BY p.id";
+        
             $data = $this->conn->query($sql);
             return $data;
         }
+        
+        
+        
+        
         public function apllicantnotiffcc($job_id) {
             $sql = "
                 SELECT COUNT(*) AS applicant_count 
@@ -337,6 +353,31 @@ Class User extends Databases{
             } else {
                 return 0; // No applicants found
             }
+        }
+
+        public function displayinprogressjobintalent($tid) {
+            $sql = "
+            SELECT p.*,
+                   c.idnumber AS clientid,
+                   c.fname AS client_fname,
+                   c.lname AS client_lname
+            FROM tblposting p
+            LEFT JOIN tblapply a ON p.id = a.job_id 
+            LEFT JOIN tblinfo i ON a.talent_id = i.idnumber 
+            LEFT JOIN tblinfo c ON p.client_idnumber = c.idnumber 
+            WHERE a.talent_id = '$tid' 
+              AND p.status = 'inprogress'
+              AND i.status = 'hired'
+            GROUP BY p.id
+            ";
+            $data = $this->conn->query($sql);
+            return $data;
+        }
+        
+        public function chat($recieverid){
+            $sql = "SELECT fname,lname FROM tblinfo where idnumber = '$recieverid'";
+            $data = $this->conn->query($sql);
+            return $data;
         }
   
 }

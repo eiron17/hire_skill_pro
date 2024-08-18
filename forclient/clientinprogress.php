@@ -135,6 +135,10 @@ $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
             xhttp.open("GET", "../ajax/displayjobfccopy.php?cid=" + cid, true);
             xhttp.send();
         }
+
+        function chat(uid){
+            window.open("chat.php?reciever=" + uid,"_self");
+        }
     </script>
 </body>
 </html>

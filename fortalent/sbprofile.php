@@ -137,7 +137,7 @@ echo $u->updatetinfo($idn,$fname,$lname,$gender,$contact,$address,$education,$em
 <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand ms-5" href="#">Talent</a>
+            <a class="navbar-brand ms-5" href="talent.php">Talent</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -220,7 +220,7 @@ echo $u->updatetinfo($idn,$fname,$lname,$gender,$contact,$address,$education,$em
             </div>
             <div class="modal-body">
                 <form id="editForm" method="POST">
-                <input type="text" name="idnumber1" value="<?= htmlspecialchars($profile['idnumber'] ?? '') ?>">
+                <input type="hidden" name="idnumber1" value="<?= htmlspecialchars($profile['idnumber'] ?? '') ?>">
                     <div class="mb-3">
                         <label for="fname" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="fname" name="fname" value="<?= htmlspecialchars($profile['fname'] ?? '') ?>">

@@ -2,11 +2,42 @@
 session_start();
 if (!isset($_SESSION['idn'])) {
     header('location:../logout.php');
+    exit();
 }
 if ($_SESSION['role'] != "Admin") {
     header('location:../index.php');
+    exit();
+}
+
+// Include your database connection
+require_once '../Class/Databases.php';
+
+// Create an instance of your database class
+$db = new Databases();
+
+// SQL query to count the total number of projects with status 'inprogress'
+$query_inprogress = "SELECT COUNT(*) AS total_inprogress_projects FROM tblposting WHERE status = 'inprogress'";
+$result_inprogress = $db->conn->query($query_inprogress);
+
+// Fetch the result for inprogress projects
+$total_inprogress_projects = 0;
+if ($result_inprogress->num_rows > 0) {
+    $row_inprogress = $result_inprogress->fetch_assoc();
+    $total_inprogress_projects = $row_inprogress['total_inprogress_projects'];
+}
+
+// SQL query to count the total number of projects with status 'open'
+$query_open = "SELECT COUNT(*) AS total_open_projects FROM tblposting WHERE status = 'open'";
+$result_open = $db->conn->query($query_open);
+
+// Fetch the result for open projects
+$total_open_projects = 0;
+if ($result_open->num_rows > 0) {
+    $row_open = $result_open->fetch_assoc();
+    $total_open_projects = $row_open['total_open_projects'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +97,7 @@ if ($_SESSION['role'] != "Admin") {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
-            <a class="navbar-brand ms-5" href="#">
+            <a class="navbar-brand ms-5" href="adminpage.php">
                 <img src="../images/fvlogo.png" height="50" width="auto" alt="Logo"> Admin Dashboard
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,8 +121,8 @@ if ($_SESSION['role'] != "Admin") {
                     <h1><i class="fa-solid fa-arrow-right sidebar-toggle-icon d-md-none" id="sidebarToggle"></i></h1>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            <a class="nav-link active" href="adminpage.php">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard 
                             </a>
                         </li>
                         <li class="nav-item">
@@ -104,9 +135,20 @@ if ($_SESSION['role'] != "Admin") {
                                 <i class="fas fa-project-diagram"></i> Projects
                             </a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-money-check"></i> Payments
+                            <a class="nav-link" href="contact.php">
+                                <i class="fas fa-money-check"></i> User Messages
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="feeback.php">
+                                <i class="fas fa-money-check"></i> Feedback
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="transaction.php">
+                                <i class="fas fa-comments"></i> Transaction
                             </a>
                         </li>
                     </ul>
@@ -122,42 +164,49 @@ if ($_SESSION['role'] != "Admin") {
                 <div class="row">
                     <!-- Total Users -->
                     <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card border-primary">
-                            <div class="card-header">
-                                <h5>Total Users</h5>
+                        <a href="manageuser.php" class="text-decoration-none">
+                            <div class="card border-primary">
+                                <div class="card-header">
+                                    <h5>Total Users</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-title" id="response"></h3>
+                                    <p class="card-text">Total registered users on the platform.</p>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <h3 class="card-title" id="response"></h3>
-                                <p class="card-text">Total registered users on the platform.</p>
+                        </a>
+                    </div>
+                
+
+                    <!-- Card for Inprogress Projects -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <a href="projectjob.php" class="text-decoration-none">
+                            <div class="card border-primary">
+                                <div class="card-header">
+                                    <h5>In Progress Project </h5>
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-title"><?php echo $total_inprogress_projects; ?></h3>
+                                    <p class="card-text">Total number of current projects.</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
-                    <!-- Current Projects per User -->
+                    <!-- Card for Open Projects -->
                     <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card border-primary">
-                            <div class="card-header">
-                                <h5>Current Projects per User</h5>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="card-title">5</h3>
-                                <p class="card-text">Average number of projects per user.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Current Open Projects -->
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card border-primary">
+                        <a href="projectjob.php" class="text-decoration-none">
+                            <div class="card border-primary">
                             <div class="card-header">
                                 <h5>Current Open Projects</h5>
                             </div>
                             <div class="card-body">
-                                <h3 class="card-title">76</h3>
+                                <h3 class="card-title"><?php echo $total_open_projects; ?></h3>
                                 <p class="card-text">Total number of projects currently open.</p>
                             </div>
                         </div>
                     </div>
+
 
 
                     <!-- Payment Status -->

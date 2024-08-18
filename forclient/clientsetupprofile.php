@@ -70,7 +70,7 @@ $showModal = false; // Variable to control modal display
             <?= htmlspecialchars($errorMessage) ?>
         </div>
         <?php endif; ?>
-        <form method="POST" action="upload.php" enctype="multipart/form-data">
+        <form  method="POST" action="upload.php" enctype="multipart/form-data">
             <div class="card mb-3">
                 <div class="card-body">
                     <h4 class="card-title">Profile Photo & Personal Info</h4>

@@ -5,9 +5,8 @@
             <th class="border">Job Id</th>
             <th class="border">Job Title</th>
             <th class="border">Job Terms</th>
-            <th class="border">Project Budget</th>
             <th class="border">Project Status</th>
-            <th class="border">Hired Talent</th>
+            <th class="border">Employer</th>
             <th class="border text-center">Chat</th>
             <th class="border text-center">Marked Dode</th>
         </tr>
@@ -28,9 +27,9 @@ while ($row = $data->fetch_assoc()) {
             <td class="border ">'.$row['job_term'].'</td>
             <td class="border "><span class="fw-bold">Fixed Price:</span> '.$row['fixed_price'].' <span class="fw-bold">Hourly Rate:</span> '.$row['hourly_rate'].'</td>
             <td class="border ">'.$row['status'].'</td>
-            <td class="border ">'.$row['hired_fname'].' '.$row['hired_lname'].'</td>
+            <td class="border ">'.$row['hired_fname'].''.$row['hired_lname'].'</td>
             <td class="border text-center">
-                <button type="button" onclick="chat(&quot;'.$row['talent_id'].'&quot;)" class="btn shadow-none text-dark position-relative m-2">
+                <button type="button" class="btn shadow-none text-dark position-relative m-2">
                 <i class="fa-solid fa-comments"></i>
                 </button>
             </td>

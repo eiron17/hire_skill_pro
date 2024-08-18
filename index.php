@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +9,13 @@
     <link href="fontawesome-free-6.2.0-web/css/all.min.css" rel="stylesheet">
     <link href="css/style-index.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/fvlogo.png">
+
 </head>
 <body>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light border p-2 fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand ms-5" href="#">
+        <a class="navbar-brand ms-5" href="index.php">
             <img src="images/fvlogo.png" alt="Logo" class="logo" height="50" width="auto"> <span class="fw-bold">Hire<span class="text-primary">Skill</span>Pro</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,6 +101,96 @@ Always Improving: We continually add new features to enhance our platform.</p>
       </div>
   </div>
 </section>
+
+<!-- For Clients Section -->
+<section id="forclient" class="container my-5">
+    <div class="section-wrapper shadow-lg p-4 bg-white">
+        <h2 class="text-center mb-4">For Clients</h2>
+        <p class="text-center mb-4">Discover the advantages of working with top freelancers and independent professionals to achieve your project goals efficiently and effectively.</p>
+        
+        <div class="row">
+            <!-- Example Client Benefit Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card border-info shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Access to Top Talent</h5>
+                        <p class="card-text">Find skilled professionals with expertise across various industries to meet your specific project needs.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card border-warning shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Flexible Hiring</h5>
+                        <p class="card-text">Choose between short-term or long-term engagements based on your project requirements and budget.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card border-secondary shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Streamlined Process</h5>
+                        <p class="card-text">Enjoy a smooth and efficient hiring process with our user-friendly platform and dedicated support team.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button Section -->
+        <div class="text-center mt-5">
+            <a href="#" class="btn btn-primary fw-bold me-2 m-2" data-bs-toggle="modal" data-bs-target="#exampleModal3">Join Us?</a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- For Talent Section -->
+<section id="fortalent" class="container my-5">
+    <div class="section-wrapper shadow-lg p-4">
+        <h2 class="text-center mb-4">For Talents</h2>
+        <p class="text-center mb-4">Work with the largest network of independent professionals and get things done—from quick turnarounds to big transformations.</p>
+        
+        <div class="row">
+            <!-- Example Talent Find Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card border-primary shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Quick Turnarounds</h5>
+                        <p class="card-text">Connect with professionals who can deliver high-quality work in a short amount of time, helping you meet tight deadlines with ease.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card border-success shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Expert Professionals</h5>
+                        <p class="card-text">Access a diverse pool of talent with specialized skills to handle any project, from creative design to technical development.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card border-danger shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Big Transformations</h5>
+                        <p class="card-text">Partner with top-tier professionals to drive significant changes and achieve your business goals with innovative solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Button Section -->
+        <div class="text-center mt-5">
+            <a href="#" class="btn btn-primary fw-bold me-2 m-2" data-bs-toggle="modal" data-bs-target="#exampleModal3">Join Us?</a>
+        </div>
+    </div>
+</section>
+
 <!-- Services Section -->
 <section id="services" class="bg-light py-5">
   <div class="container pt-5">
@@ -223,72 +315,87 @@ Always Improving: We continually add new features to enhance our platform.</p>
             </div>
         </div>
     </section>
+
+
     <!-- Footer Section -->
-    <footer class="bg-light text-dark pt-5 pb-4 border-top border-2">
+<footer class="bg-light text-dark pt-5 pb-4 border-top border-2">
     <div class="container">
         <div class="row">
 
+            <!-- About Us Section -->
             <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #007bff;">About Us</h5>
+                <a href="#about" style="text-decoration: none; color: #007bff;">
+                    <h5 class="text-uppercase mb-4 font-weight-bold">About Us</h5>
+                </a>
                 <hr class="mb-4">
                 <p>At HireSkillPro, we connect talented freelancers with businesses that need their skills. Whether you're looking for work or hiring, HireSkillPro makes it easy.</p>
             </div>
 
+            <!-- For Clients Section -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #007bff;">For Clients</h5>
+                <a href="#forclient" style="text-decoration: none; color: #007bff;">
+                    <h5 class="text-uppercase mb-4 font-weight-bold">For Clients</h5>
+                </a>
                 <hr class="mb-4">
-                <p><a href="#" class="text-dark" style="text-decoration:none">Hire a Worker</a></p>
-                <p><a href="#" class="text-dark" style="text-decoration:none">Post a Job</a></p>
-                <p><a href="#" class="text-dark" style="text-decoration:none">Talent Marketplace</a></p>
+                <p><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="text-dark" style="text-decoration:none">Hire a Worker</a></p>
+                <p><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="text-dark" style="text-decoration:none">Post a Job</a></p>
+                <p><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="text-dark" style="text-decoration:none">Talent Marketplace</a></p>
             </div>
 
+            <!-- For Talent Section -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #007bff;">For Talent</h5>
+                <a href="#fortalent" style="text-decoration: none; color: #007bff;">
+                    <h5 class="text-uppercase mb-4 font-weight-bold">For Talent</h5>
+                </a>
                 <hr class="mb-4">
-                <p><a href="#" class="text-dark" style="text-decoration:none">How to Work</a></p>
-                <p><a href="#" class="text-dark" style="text-decoration:none">Find Work Jobs Worldwide</a></p>
-                <p><a href="#" class="text-dark" style="text-decoration:none">Direct Contracts</a></p>
+                <p><a  href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="text-dark" style="text-decoration:none">How to Work</a></p>
+                <p><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="text-dark" style="text-decoration:none">Find Work Jobs Worldwide</a></p>
+                <p><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="text-dark" style="text-decoration:none">Direct Contracts</a></p>
             </div>
 
+            <!-- Contact Section -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                 <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #007bff;">Contact</h5>
                 <hr class="mb-4">
-                <p><i class="fas fa-home mr-3"></i> Lipa City, Batangas</p>
-                <p><i class="fas fa-envelope mr-3"></i> hireskillpro.com</p>
-                <p><i class="fas fa-phone mr-3"></i> +63 09000000000</p>
-                <p><i class="fas fa-print mr-3"></i> +63 09000000000</p>
+                <p><i class="fas fa-home me-3"></i> Lipa City, Batangas</p>
+                <p><i class="fas fa-envelope me-3"></i> <a href="mailto:info@hireskillpro.com" class="text-dark" style="text-decoration:none">info@hireskillpro.com</a></p>
+                <p><i class="fas fa-phone me-3"></i> +63 09000000000</p>
+                <p><i class="fas fa-print me-3"></i> +63 09000000000</p>
             </div>
-			
 
         </div>
+
+        <!-- Footer Bottom -->
         <div class="row mt-4">
             <div class="col text-center">
                 <p>
-                    Copyright 2024 All Rights Reserved By:
-                    <a href="#" style="text-decoration:none; color: #007bff;">
+                    &copy; 2024 All Rights Reserved By:
+                    <a href="index.php" style="text-decoration:none; color: #007bff;">
                         <strong>Hire Skill Pro INC.</strong>
                     </a>
                 </p>
             </div>
         </div>
+
         <!-- Feedback Button -->
-        <div id="feedback-button" onclick="openFeedbackForm()">
-            Feedback
+        <div id="feedback-button" onclick="openFeedbackForm()" class="text-center mt-4">
+            <button class="btn btn-primary">Feedback</button>
         </div>
 
         <!-- Feedback Form -->
-        <div id="feedback-form">
-            <div class="form-content">
-            <span class="close-btn" onclick="closeFeedbackForm()">&times;</span>
-            <h2>Feedback</h2>
-            <form>
-                <textarea placeholder="Your feedback..." rows="5" id="feedbackbox"></textarea>
-                <button type="button" onclick=" webfeedback()" >Submit</button>
-            </form>
+        <div id="feedback-form" style="display: none;">
+            <div class="form-content p-4" style="background: #fff; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <span class="close-btn" onclick="closeFeedbackForm()" style="cursor: pointer; float: right; font-size: 1.5rem;">&times;</span>
+                <h2>Feedback</h2>
+                <form>
+                    <textarea placeholder="Your feedback..." rows="5" id="feedbackbox" class="form-control mb-3"></textarea>
+                    <button type="button" class="btn btn-primary" onclick="webfeedback()">Submit</button>
+                </form>
             </div>
         </div>
     </div>
 </footer>
+
 
     <script src="bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
 
@@ -568,3 +675,4 @@ function webfeedback() {
     xhttp.send();
 }
 </script>
+

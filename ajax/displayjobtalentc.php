@@ -7,7 +7,7 @@
             <th class="border">Job Terms</th>
             <th class="border">Project Budget</th>
             <th class="border">Project Status</th>
-            <th class="border">Hired Talent</th>
+            <th class="border">Employer</th>
             <th class="border text-center">Chat</th>
             <th class="border text-center">Marked Dode</th>
         </tr>
@@ -16,11 +16,10 @@
         <?php
 include_once '../Class/User.php';
 $u = new User();
-$cid = $_GET['cid'];
-$data = $u->displayinprogressjob($cid);
+$tid = $_GET['tid'];
+$data = $u->displayinprogressjobintalent($tid);
 
 while ($row = $data->fetch_assoc()) {
-    $applicant_count = $u->apllicantnotiffcc($row['id']);
     echo '
         <tr class="text-center">
             <td class="border">'.$row['id'].'</td>
@@ -28,9 +27,9 @@ while ($row = $data->fetch_assoc()) {
             <td class="border ">'.$row['job_term'].'</td>
             <td class="border "><span class="fw-bold">Fixed Price:</span> '.$row['fixed_price'].' <span class="fw-bold">Hourly Rate:</span> '.$row['hourly_rate'].'</td>
             <td class="border ">'.$row['status'].'</td>
-            <td class="border ">'.$row['hired_fname'].' '.$row['hired_lname'].'</td>
+            <td class="border ">'.$row['client_fname'].' '.$row['client_lname'].'</td>
             <td class="border text-center">
-                <button type="button" onclick="chat(&quot;'.$row['talent_id'].'&quot;)" class="btn shadow-none text-dark position-relative m-2">
+                <button type="button" onclick="chat(&quot;'.$row['clientid'].'&quot;)" class="btn shadow-none text-dark position-relative m-2">
                 <i class="fa-solid fa-comments"></i>
                 </button>
             </td>

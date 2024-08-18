@@ -10,7 +10,7 @@ if ($_SESSION['role'] != "Client2") {
 }
 
 $cidd = $_SESSION['idn'];
-include('Database.php'); // Ensure this file connects to your database
+include('Databases.php'); // Ensure this file connects to your database
 
 // Get the job_id from query parameter (if available)
 $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
@@ -103,7 +103,7 @@ $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="profilem.php">
+                            <a class="nav-link" href="update.php">
                                 <i class="fas fa-user-cog"></i> Profile Management
                             </a>
                         </li>

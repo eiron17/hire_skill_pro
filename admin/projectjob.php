@@ -17,6 +17,8 @@ if ($_SESSION['role'] != "Admin") {
     <link href="../fontawesome-free-6.2.0-web/css/all.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../images/fvlogo.png">
     <link href="css/style.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" rel="stylesheet">
     <style>
         .bg-dark-blue {
             background-color: #003366;
@@ -55,18 +57,43 @@ if ($_SESSION['role'] != "Admin") {
                 display: block;
             }
         }
+        .table-container {
+            margin: 20px 0; /* Existing margins */
+            padding: 15px; /* Existing padding */
+            overflow-x: auto; /* Ensure horizontal scrolling if needed */
+            margin-top: 30px; /* Adjust this value as needed */
+        }
         .sidebar-toggle-icon {
             font-size: 1.5rem;
             color: #003366;
             cursor: pointer;
         }
+        /* Add spacing around the table */
+        .table-container {
+            margin: 20px 0; /* Adjust top and bottom margins as needed */
+            padding: 15px; /* Adjust padding as needed */
+            overflow-x: auto; /* Add horizontal scroll if table is too wide */
+        }
+        .table-container .table {
+            margin-bottom: 0; /* Remove bottom margin for table to fit nicely */
+        }
+        /* Add margin-top to DataTables search bar */
+        .dataTables_filter {
+            margin-top: 20px; /* Adjust this value as needed */
+        }
     </style>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <!-- Include Bootstrap Bundle JS -->
+    <script src="../bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
-            <a class="navbar-brand ms-5" href="#">
+            <a class="navbar-brand ms-5" href="adminpage.php">
                 <img src="../images/fvlogo.png" height="50" width="auto" alt="Logo"> Admin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,6 +101,7 @@ if ($_SESSION['role'] != "Admin") {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
                         <a class="btn btn-primary" href="../logout.php">Log Out</a>
                     </li>
                 </ul>
@@ -95,7 +123,7 @@ if ($_SESSION['role'] != "Admin") {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="manageuser.php">
                                 <i class="fas fa-users"></i> Users
                             </a>
                         </li>
@@ -105,13 +133,18 @@ if ($_SESSION['role'] != "Admin") {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-credit-card"></i> Billing
+                            <a class="nav-link" href="contact.php">
+                                <i class="fas fa-money-check"></i> User Messages
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-money-check"></i> Payments
+                            <a class="nav-link" href="feedback.php">
+                                <i class="fas fa-money-check"></i> Feedback
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="transaction.php">
+                                <i class="fas fa-comments"></i> Transaction
                             </a>
                         </li>
                     </ul>
@@ -121,70 +154,90 @@ if ($_SESSION['role'] != "Admin") {
             <!-- Dashboard Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Admin Manage User</h1>
+                    <h1 class="h2">Total Projects</h1>
                 </div>
 
                 <div class="row">
-                    <!-- Total Users -->
+                    <!-- Total Projects -->
                     <div class="col-md-12 mb-4">
                         <div class="card border-primary">
-                            <div class="card-header">
-                                <h5>Total Users</h5>
-                            </div>
-                            <div class="card-body">
-                            <table class="table table-hover bg-light" id="tbl">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th class="border">Id</th>
-                                                <th class="border">Cilent Id</th>
-                                                <th class="border">Job Title</th>
-                                                <th class="border">Price</th>
-                                                <th class="border">Qualifications</th>
-                                                <th class="border">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            include_once '../Class/User.php';
-                                            $u = new User();
-                                            $data = $u->displayadminpjobs();
-                                            while ($row = $data->fetch_assoc()) {
-                                                echo '
-                                                    <tr class="text-center">
-                                                        <td class="border">' . $row['id'] . '</td>
-                                                        <td class="border">' . $row['client_idnumber'] . '</td>
-                                                        <td class="border">' . $row['job_title'] . '</td>
-                                                        <td class="border">' . $row['fixed_price'] . '</td>
-                                                        <td class="border">' . $row['qualifications'] . '</td>
-                                                        <td>
-                                                        <button onclick="" class="btn btn-primary">Edit</button>
-                                                        <button onclick="" class="btn btn-danger">Block</button>
-                                                        </td>
-                                                        <div id="response"></div>
-                                                    </tr>
-                                                ';
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="card-body table-container">
+                                <table class="table table-hover bg-light" id="tbl">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th class="border">Id</th>
+                                            <th class="border">Client Id</th>
+                                            <th class="border">Job Title</th>
+                                            <th class="border">Price</th>
+                                            <th class="border">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        include_once '../Class/User.php';
+                                        $u = new User();
+                                        $data = $u->displayadminpjobs();
+                                        while ($row = $data->fetch_assoc()) {
+                                            echo '
+                                                <tr class="text-center">
+                                                    <td class="border">' . htmlspecialchars($row['id']) . '</td>
+                                                    <td class="border">' . htmlspecialchars($row['client_idnumber']) . '</td>
+                                                    <td class="border">' . htmlspecialchars($row['job_title']) . '</td>
+                                                    <td class="border">' . htmlspecialchars($row['fixed_price']) . '</td>
+                                                    <td class="border">' . htmlspecialchars($row['status']) . '</td>
+                                                    
+                                                </tr>
+                                            ';
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </main>
         </div>
     </div>
 
-    <script src="../bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
+    
+
+   
+
     <script>
-        document.getElementById('sidebarToggle').addEventListener('click', function() {
-            var sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
+    $(document).ready(function() {
+        // Initialize DataTables
+        $('#tbl').DataTable({
+            "language": {
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:"
+            }
         });
 
+        // Sidebar toggle functionality
+        $('#sidebarToggle').click(function() {
+            $('#sidebar').toggleClass('collapsed');
+        });
 
+        // Handle Edit button click
+        $('.edit-btn').on('click', function() {
+            var id = $(this).data('id');
+            $('#edit-id').val(id); // Set the ID in the hidden input
+            // You can add additional logic if needed to populate the modal with data
+        });
+
+        // Handle Block button click
+        $('.block-btn').on('click', function() {
+            var id = $(this).data('id');
+            $('#block-id').val(id); // Set the ID in the hidden input
+        });
+
+       
+    });
     </script>
 </body>
 </html>

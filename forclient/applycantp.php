@@ -153,18 +153,19 @@ $myprofile = $u->selectstatus($ggtid,$jobid);
 <form method="POST">
             <!-- Large Modal -->
 <div class="modal fade" id="largeModal5" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="largeModalLabel">Large Modal Title</h5>
+        <h5 class="modal-title" id="largeModalLabel">Hire Talent</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <!-- Modal Body Content -->
-       <input type="text" name="tjid" value="<?=$ggtid?>">
-       <input type="text" name="jid" value="<?=$jobid?>">
-       <input type="text" name="tstatus" value="<?=$tstatus?>">
-       <input type="text" name="pstatus" value="<?=$pstatus?>">
+       <input type="hidden" name="tjid" value="<?=$ggtid?>">
+       <input type="hidden" name="jid" value="<?=$jobid?>">
+       <input type="hidden" name="tstatus" value="<?=$tstatus?>">
+       <input type="hidden" name="pstatus" value="<?=$pstatus?>">
+       <p>Want to Hire this Talent?</p>
 
 
 

@@ -1,13 +1,6 @@
-
 <?php
-// Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 include_once '../Class/User.php';
-
-if (isset($_POST['submit'])) {
+if(isset($_POST['submit'])){
     $cidn = $_POST['erp'];
     $fname = $_POST['fname'];
     $mname = $_POST['mname'];
@@ -18,82 +11,75 @@ if (isset($_POST['submit'])) {
 
     $file = $_FILES['file'];
     
-    $fileName = $file['name'];
-    $fileTmpName = $file['tmp_name'];
-    $fileSize = $file['size'];
-    $fileError = $file['error'];
-    $fileType = $file['type'];
+    $fileName = $_FILES['file']['name'];
+    $fileTmpName = $_FILES['file']['tmp_name'];
+    $fileSize = $_FILES['file']['size'];
+    $fileError = $_FILES['file']['error'];
+    $fileType = $_FILES['file']['type'];
 
-    $fileExt = explode('.', $fileName);
+    $fileExt = explode('.',$fileName);
     $fileActualExt = strtolower(end($fileExt));
 
-    $allowed = array('jpg', 'jpeg', 'png');
+    $allowed = array('jpg','jpeg','png');
 
-   if(in_array($fileActualExt, $allowed)){
-      if($fileError === 0){
-         if($fileSize < 5000000){
-            $fileNameNew = uniqid('', true).".".$fileActualExt;
-            $fileDestination = '../images/'.$fileNameNew;
-            move_uploaded_file($fileTmpName, $fileDestination);
-            $rimg = $fileNameNew;
-            $u = new User();
-            $u->setupprotc($cidn, $rimg, $fname, $mname, $lname, $contactNumber, $address, $languages);
-         }else{
-            echo '
-            <script>
-               alert("Your File is Too Big")
-            </script>
-            ';
-         }
-      }else{
-         echo '
-            <script>
-               alert("There was an error!")
-            </script>
-            ';
-      }
-   }else{
-      echo '
-            <script>
-               alert("YOU CANNOT UPLOAD THIS TYPE OF FILE!")
-            </script>
-            ';
-   }
+    if (in_array($fileActualExt, $allowed)){
+        if ($fileError === 0){
+            if($fileSize < 1000000){
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                $fileDestination = '../images/'.$fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);
+                $rimg = $fileNameNew;
+                $u= new User();
+                $u->setupprotc($cidn,$rimg, $fname, $mname, $lname, $contactNumber, $address, $languages);
+            }else{
+                echo "The File is too Big!";
+            }
+        }else{
+            echo "There was an Error Uploading Your File!";
+        }
+    }else{
+        echo "You cannot Uplaod Files of this Type!";
+    }
+
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Profile Upload</title>
-   <style>
-      section{
-         display: flex;
-         height: 100vh;
-         justify-content: center;
-         align-items: center;
-         flex-direction: column;
-      }
-      *{
-         font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-         text-decoration: none;
-         margin: 0;
-         padding: 0;
-      }
-      a{
-         background-color: #FC4100;
-         padding: 20px;
-         border-radius: 10px;
-         color: white;
-         margin-top: 20px;
-      }
-   </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .content {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .content a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .content a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-   <section>
-   <h1>Upload Success!</h1>
-   <a href="../login.php"><h3>Back to home</h3></a>
-   </section>
+    <div class="content">
+        <h2>Success!</h2>
+        <p><a href="../login.php">Go to Login Page</a></p>
+    </div>
 </body>
 </html>

@@ -10,23 +10,6 @@ if ($_SESSION['role'] != "Talent") {
 include_once '../Class/User.php';
 $u = new User();
 $uid=$_SESSION['idn'];
-$myprofile = $u->myprofile($uid); 
-   while($row = $myprofile->fetch_assoc()){
-    $profilephoto = $row['profile_photo'];
-    $gfname = $row['fname'];
-   $gmname = $row['mname'];
-   $glname = $row['lname'];
-   $ggender = $row['gender'];
-   $gcontact = $row['contact_no'];
-   $gaddress = $row['address'];
-   $gmh = $row['employment_history'];
-   $gedu= $row['education'];
-   $gskill = $row['skills'];
-   $ghr = $row['hourly_rate'];
-   $gavail = $row['availability'];
-   $gloc = $row['location'];
-   $glang = $row['languages'];
-}
 
 ?>
 <!DOCTYPE html>
@@ -58,6 +41,7 @@ $myprofile = $u->myprofile($uid);
         .border-primary {
             border-color: #003366 !important;
         }
+
         .sidebar {
             position: -webkit-sticky;
             position: sticky;
@@ -105,85 +89,25 @@ $myprofile = $u->myprofile($uid);
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="profileModalLabel">Profile Preview</h5>
+                <h5 class="modal-title" id="profileModalLabel">Job Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <?php if (!empty($errorMessage)): ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= $errorMessage ?>
-                </div>
-                <?php endif; ?>
-
-                <!-- Resume Style Content -->
-                <div class="resume-container">
+                <div id="responses"></div>
+                <!-- Job ID input before Client ID input -->
+                <input type="hidden" id="uidd" value="<?=$uid?>">
                 <input type="hidden" id="jobid">
                 <input type="hidden" id="clientid">
-                <input type="hidden" id="uidd" value="<?=trim($_SESSION['idn'])?>">
-                    <div class="resume-header text-center mb-4">
-                    <img src="<?= '../images/' . $profilephoto ?>" alt="Profile Photo" class="img-fluid rounded-circle mb-3" style="width: 100px;">
-
-                        <h4><?= $gfname ?> <?= $glname ?></h4>
-                        <p><?= $ggender ?></p>
-                    </div>
-
-                    <div class="contact-info resume-section mb-4">
-                        <h5>Contact</h5>
-                        <p><i class="fas fa-phone"></i> <?= $gcontact ?></p>
-                        <p><i class="fas fa-map-marker-alt"></i> <?= $gaddress ?></p>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="education resume-section mb-4">
-                                <h5>Educational History</h5>
-                                <p><?= $gedu ?></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="experience resume-section mb-4">
-                                <h5>Employment History</h5>
-                                <p><?= $gmh ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="skills resume-section mb-4">
-                                <h5>Skills</h5>
-                                <p><?= $gskill ?></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="availability resume-section mb-4">
-                                <h5>Availability</h5>
-                                <p><?= $gavail ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="hourly-rate resume-section mb-4">
-                                <h5>Hourly Rate</h5>
-                                <p><?= $ghr ?></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="languages resume-section mb-4">
-                                <h5>Languages</h5>
-                                <p><?= $glang ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
             </div>
             <div class="modal-footer">
                 <button type="button" id="sutapply" onclick="applysubmit()" name="submitapply" class="btn btn-primary">Submit</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+            </div>
         </div>
     </div>
 </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
@@ -242,16 +166,12 @@ $myprofile = $u->myprofile($uid);
 
             <!-- Dashboard Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center  border-bottom">
                     <h1 class="h2">Talent Dashboard</h1>
                 </div>
-                <div class="row">
-                    <!-- Current Jobs -->
-                    <div id="response">
-                                    </div>
-                    
-                    <!-- Add more cards or content as needed -->
-                </div>
+                <div id="response"></div>
+                </section>
+      
             </main>
         </div>
     </div>
@@ -279,12 +199,30 @@ $myprofile = $u->myprofile($uid);
         xhttp.send();
         }
 
-        function showdetails(jobid, clientid){
-      document.getElementById("jobid").value = jobid;
-      document.getElementById("clientid").value = clientid;
-   }
+        function displayjobdetails(jobid,clientid) {
+    document.getElementById("jobid").value = jobid;  
+    document.getElementById("clientid").value = clientid;  
 
-   function applysubmit(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("responses").innerHTML = this.responseText;
+            new DataTable('#tbl', {
+                scrollCollapse: true,
+                scrollY: '50vh'
+            });
+            //alert(this.responseText);
+        }
+    };
+
+    // Fixed the query string by adding an ampersand between jobid and clientid
+    xhttp.open("GET", "../ajax/displayjobdetails.php?jobid=" + jobid + "&clientid=" + clientid, true);
+    xhttp.send();
+}
+
+
+
+    function applysubmit() {
     var jobid = document.getElementById("jobid").value;
     var clientid = document.getElementById("clientid").value;
     var uidd = document.getElementById("uidd").value;
@@ -305,12 +243,20 @@ $myprofile = $u->myprofile($uid);
                     }, 1000); // Matches the CSS transition duration
                 }
             }, 2000);
+
+            // Hide the modal
+            var modalElement = document.getElementById('profileModal');
+            var modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
         }
     }
     xhttp.open("GET", "../ajax/applyt.php?jobid=" + jobid + "&clientid=" + clientid + "&uidd=" + uidd, true);
     xhttp.send();
 }
+
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </div>
 
 

@@ -1,12 +1,25 @@
 <?php
-session_start();
-if (!isset($_SESSION['idn'])) {
-    header('location:../logout.php');
+include_once '../Class/Databases.php'; // Ensure this path is correct
+include_once '../Class/User.php';
+
+// Initialize notification message
+$notification = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['block_id'])) {
+    $id = intval($_POST['block_id']);
+    $u = new User();
+    $result = $u->blockUser($id);
+    
+    if ($result) {
+        $notification = '<div class="alert alert-success" role="alert">User blocked successfully!</div>';
+    } else {
+        $notification = '<div class="alert alert-danger" role="alert">Error blocking user.</div>';
+    }
 }
-if ($_SESSION['role'] != "Admin") {
-    header('location:../index.php');
-}
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +73,32 @@ if ($_SESSION['role'] != "Admin") {
             color: #003366;
             cursor: pointer;
         }
+        .table-container {
+            margin: 20px 0; /* Existing margins */
+            padding: 15px; /* Existing padding */
+            overflow-x: auto; /* Ensure horizontal scrolling if needed */
+            margin-top: 30px; /* Adjust this value as needed */
+        }
+        .table-container .table {
+            margin-bottom: 0; /* Remove bottom margin for table to fit nicely */
+        }
+        .dataTables_filter {
+            margin-top: 20px; /* Adjust this value as needed */
+            text-align: right; /* Align search bar to the right */
+        }
+        /* Hide Previous and Next buttons */
+        .dataTables_paginate .paginate_button.previous,
+        .dataTables_paginate .paginate_button.next {
+            display: none;
+        }
+        /* Hide the page number '1' button */
+        .dataTables_paginate .paginate_button:nth-child(2) {
+            display: none; /* Adjust this index if needed */
+        }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="../bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -74,6 +112,7 @@ if ($_SESSION['role'] != "Admin") {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
                         <a class="btn btn-primary" href="../logout.php">Log Out</a>
                     </li>
                 </ul>
@@ -95,18 +134,13 @@ if ($_SESSION['role'] != "Admin") {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="manageuser.php">
                                 <i class="fas fa-users"></i> Users
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="projectjob.php">
                                 <i class="fas fa-project-diagram"></i> Projects
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-credit-card"></i> Billing
                             </a>
                         </li>
                         <li class="nav-item">
@@ -121,70 +155,87 @@ if ($_SESSION['role'] != "Admin") {
             <!-- Dashboard Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Admin Manage User</h1>
+                    <h1 class="h2">Total Users</h1>
                 </div>
 
+                <!-- Notification -->
+                <?php if ($notification): ?>
+                    <div class="mb-4">
+                        <?php echo $notification; ?>
+                    </div>
+                <?php endif; ?>
+
                 <div class="row">
-                    <!-- Total Users -->
+                    <!-- User Table -->
                     <div class="col-md-12 mb-4">
                         <div class="card border-primary">
-                            <div class="card-header">
-                                <h5>Total Users</h5>
-                            </div>
-                            <div class="card-body">
-                            <table class="table table-hover bg-light" id="tbl">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th class="border">Id</th>
-                                                <th class="border">First Name</th>
-                                                <th class="border">Last Name</th>
-                                                <th class="border">Role</th>
-                                                <th class="border">Status</th>
-                                                <th class="border">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            include_once '../Class/User.php';
-                                            $u = new User();
-                                            $data = $u->displayadminuser();
-                                            while ($row = $data->fetch_assoc()) {
-                                                echo '
-                                                    <tr class="text-center">
-                                                        <td class="border">' . $row['id'] . '</td>
-                                                        <td class="border">' . $row['firstname'] . '</td>
-                                                        <td class="border">' . $row['last_name'] . '</td>
-                                                        <td class="border">' . $row['role'] . '</td>
-                                                        <td class="border">' . $row['status'] . '</td>
-                                                        <td>
-                                                        <button onclick="" class="btn btn-primary">Edit</button>
-                                                        <button onclick="" class="btn btn-danger">Block</button>
-                                                        </td>
-                                                        <div id="response"></div>
-                                                    </tr>
-                                                ';
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="card-body table-container">
+                                <table class="table table-hover bg-light" id="tbl">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th class="border">Id</th>
+                                            <th class="border">First Name</th>
+                                            <th class="border">Last Name</th>
+                                            <th class="border">Role</th>
+                                            <th class="border">Status</th>
+                                            <th class="border">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $u = new User();
+                                        $data = $u->displayadminuser();
+                                        while ($row = $data->fetch_assoc()) {
+                                            echo '
+                                                <tr class="text-center">
+                                                    <td class="border">' . $row['id'] . '</td>
+                                                    <td class="border">' . $row['firstname'] . '</td>
+                                                    <td class="border">' . $row['last_name'] . '</td>
+                                                    <td class="border">' . $row['role'] . '</td>
+                                                    <td class="border">' . ($row['status'] == 1 ? 'Active' : 'Blocked') . '</td>
+                                                    <td>
+                                                        <form action="" method="post" style="display:inline;">
+                                                            <input type="hidden" name="block_id" value="' . $row['id'] . '">
+                                                            <button type="submit" class="btn btn-danger">Block</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            ';
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </main>
         </div>
     </div>
 
-    <script src="../bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById('sidebarToggle').addEventListener('click', function() {
-            var sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
+    $(document).ready(function() {
+        // Initialize DataTables
+        $('#tbl').DataTable({
+            "language": {
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:"
+            }
         });
 
+        // Sidebar toggle functionality
+        $('#sidebarToggle').click(function() {
+            $('#sidebar').toggleClass('collapsed');
+        });
 
-    </script>
+        // Fade out alert messages after 5 seconds
+        $('.alert').delay(.3).fadeOut('slow');
+    });
+</script>
+
 </body>
 </html>
