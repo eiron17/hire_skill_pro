@@ -124,7 +124,7 @@ while ($row = $acc->fetch_assoc()) {
 </head>
 <body>
     <div class="chat-container">
-    <a href="home.php">Back</a>
+    <a href="talent.php">Back</a>
         <div class="chat-header"><?= $fn;?></div>
         <div class="chat-box" id="chat-box"></div>
         <div class="chat-input-container">
