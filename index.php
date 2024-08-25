@@ -350,7 +350,7 @@ Always Improving: We continually add new features to enhance our platform.</p>
                 <hr class="mb-4">
                 <p><a  href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="text-dark" style="text-decoration:none">How to Work</a></p>
                 <p><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="text-dark" style="text-decoration:none">Find Work Jobs Worldwide</a></p>
-                <p><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="text-dark" style="text-decoration:none">Direct Contracts</a></p>
+                <p><a  href="#contact" class="text-dark" style="text-decoration:none">Direct Contracts</a></p>
             </div>
 
             <!-- Contact Section -->

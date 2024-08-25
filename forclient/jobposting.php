@@ -1,12 +1,89 @@
 <?php
 session_start();
+
+// Reset the form submission flag
+$_SESSION['form_submitted'] = false;
+
+// Check if user is logged in and has the correct role
 if (!isset($_SESSION['idn'])) {
-    header('location:../logout.php');
+    header('Location: ../logout.php');
+    exit();
 }
+
 if ($_SESSION['role'] != "Client2") {
-    header('location:../index.php');
+    header('Location: ../index.php');
+    exit();
+}
+
+// Check if the user has already submitted the form
+if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted'] === true) {
+    // Redirect to client.php if form was already submitted
+    header('Location: client.php');
+    exit();
+}
+
+$message = '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve form data
+    $clientId = isset($_POST['client_id']) ? $_POST['client_id'] : null;
+    $jobTitle = isset($_POST['jobTitle']) ? $_POST['jobTitle'] : '';
+    $skills = isset($_POST['skills']) ? $_POST['skills'] : '';
+    $jobnature = isset($_POST['jobnature']) ? $_POST['jobnature'] : '';
+    $jobterm = isset($_POST['jobterm']) ? $_POST['jobterm'] : '';
+    $paymentType = isset($_POST['paymentType']) ? $_POST['paymentType'] : '';
+    $hourlyRate = isset($_POST['hourlyRateAmount']) ? $_POST['hourlyRateAmount'] : null;
+    $fixedPrice = isset($_POST['fixedPriceAmount']) ? $_POST['fixedPriceAmount'] : null;
+    $jobDescription = isset($_POST['jobDescription']) ? $_POST['jobDescription'] : '';
+    $qualifications = isset($_POST['qualifications']) ? $_POST['qualifications'] : '';
+    $createdAt = date('Y-m-d H:i:s'); // Current timestamp
+    $status = 'open'; // Default status
+
+    // Ensure client ID is not null
+    if ($clientId === null) {
+        $message = "Client ID is missing.";
+    } else {
+        // Database connection
+        $servername = 'localhost';
+        $username = 'root'; // Update this
+        $password = ''; // Update this
+        $dbname = 'hireskillpro';
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Prepare and execute the SQL query
+        $sql = "INSERT INTO tblposting (client_idnumber, job_title, skills, job_nature, job_term, payment_type, hourly_rate, fixed_price, job_description, qualifications, created_at, status)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        $stmt->bind_param('ssssssssssss', $clientId, $jobTitle, $skills, $jobnature, $jobterm, $paymentType, $hourlyRate, $fixedPrice, $jobDescription, $qualifications, $createdAt, $status);
+
+        if ($stmt->execute()) {
+            // Mark the form as submitted
+            $_SESSION['form_submitted'] = true;
+
+            // Redirect to client.php after successful submission
+            header('Location: client.php');
+            exit();
+        } else {
+            $message = "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
+        $conn->close();
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,43 +92,23 @@ if ($_SESSION['role'] != "Client2") {
     <title>Post a Job</title>
     <link href="../bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="../fontawesome-free-6.2.0-web/css/all.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../images/fvlogo.png">
     <style>
         body {
             background-color: #f8f9fa;
         }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            margin: auto;
-        }
-        .form-control, .form-select {
-            margin-bottom: 20px; /* Increased margin for more space */
-        }
-        .btn {
-            font-size: 0.75rem; /* Smaller text size */
-            padding: 0.5rem 1rem; /* Smaller padding */
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-            border: none;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
         .navbar {
-            margin-bottom: 30px; /* Increased margin for more space */
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .alert {
+            display: none; /* Hide alert by default */
+        }
+        .alert.show {
+            display: block; /* Show alert if it has the 'show' class */
         }
         .step {
             display: none;
@@ -59,95 +116,86 @@ if ($_SESSION['role'] != "Client2") {
         .step.active {
             display: block;
         }
-        .step .mb-3 {
-            margin-bottom: 20px; /* Increased margin for more space */
-        }
-        .d-none {
-            display: none;
-        }
-                .pos {
-    position: fixed;
-    width: 100%;
-    top: 40%;
-    z-index: 9999; /* A high value to ensure it is in front */
-    display: flex;
-    justify-content: center; /* Center the notification horizontally */
-}  
-.fade-out {
-    opacity: 1;
-    transition: opacity 1s ease-out;
-}
-
-.fade-out.hide {
-    opacity: 0;
-}
     </style>
 </head>
-<body onload="">
-<input type="hidden" id="ccid" value="<?=$_SESSION['idn']?>">
+<body>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand ms-5" href="client.php">Job Portal</a>
+        <a class="navbar-brand" href="#">Job Portal</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link me-5" href="client.php"><i class="fas fa-arrow-left"></i> Back</a>
+                    <a class="nav-link" href="client.php"><i class="fas fa-arrow-left"></i> Back</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<span id="notifforadd"></span>
+<div class="container">
+    <h2 class="text-center mb-4">Post a Job</h2>
 
-<div class="container mt-2">
-    <h2 class="mb-4 text-center">Post a Job</h2>
+    <!-- Display alert message -->
+    <?php if (!empty($message)) : ?>
+        <div id="alertMessage" class="alert alert-info alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
     <form method="POST" id="jobForm">
+        <input type="hidden" name="client_id" value="<?= htmlspecialchars($_SESSION['idn'], ENT_QUOTES, 'UTF-8') ?>">
+
         <!-- Step 1: Job Title -->
         <div class="step active">
             <div class="mb-3">
                 <label for="jobTitle" class="form-label">Job Title</label>
-                <input type="text" class="form-control" id="jobTitle" name="jobTitle" required>
-                <p>Enter a clear and descriptive title for the job.</p>
+                <input type="text" class="form-control" id="jobTitle" name="jobTitle" placeholder="e.g., Web Developer">
+                <p class="text-muted">Enter a clear and descriptive title for the job.</p>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary me-2" onclick="nextStep()">Next</button>
+                <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
             </div>
         </div>
+
         <!-- Step 2: Main Skills Required -->
         <div class="step">
             <div class="mb-3">
                 <label for="skills" class="form-label">Main Skills Required</label>
-                <input type="text" class="form-control" id="skills" name="skills" required>
-                <p>Specify the key skills needed for the job.</p>
+                <input type="text" class="form-control" id="skills" name="skills" placeholder="e.g., PHP, JavaScript">
+                <p class="text-muted">Specify the key skills needed for the job.</p>
             </div>
             <div class="d-flex justify-content-between">
                 <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
                 <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
             </div>
         </div>
+
         <!-- Step 3: Job Nature and Scope -->
         <div class="step">
             <div class="mb-3">
                 <label for="jobnature" class="form-label">Job Nature</label>
-                <select class="form-select" id="jobnature" name="jobnature" required>
+                <select class="form-select" id="jobnature" name="jobnature">
                     <option value="Full-Time">Full-Time</option>
-                    <option value="Part-Time">Part-Time</option>    
+                    <option value="Part-Time">Part-Time</option>
                 </select>
+                <p class="text-muted">Specify whether the job is full-time or part-time.</p>
             </div>
             <div class="mb-3">
                 <label for="jobterm" class="form-label">Job Term</label>
-                <input type="date" class="form-control" id="jobterm" name="jobterm" required>
-                <p>Specify the duration of the job.</p>
+                <input type="date" class="form-control" id="jobterm" name="jobterm">
+                <p class="text-muted">Specify the duration of the job.</p>
             </div>
             <div class="d-flex justify-content-between">
                 <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
                 <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
             </div>
         </div>
+
         <!-- Step 4: Payment -->
         <div class="step">
             <div class="mb-3">
@@ -161,14 +209,14 @@ if ($_SESSION['role'] != "Client2") {
                     <label class="form-check-label" for="paymentFixed">Fixed Budget</label>
                 </div>
                 <div id="hourlyRateSection" class="mt-3">
-                    <label for="hourlyRateAmount" class="form-label">Hourly Budget</label>
-                    <input type="number" class="form-control" id="hourlyRateAmount" name="hourlyRateAmount" step="0.01" min="0" placeholder="Enter hourly rate in PHP">
-                    <p>Enter the hourly rate you are willing to pay.</p>
+                    <label for="hourlyRateAmount" class="form-label">Hourly Rate</label>
+                    <input type="number" class="form-control" id="hourlyRateAmount" name="hourlyRateAmount" placeholder="e.g., 20">
+                    <p class="text-muted">Enter the hourly rate you're willing to pay.</p>
                 </div>
-                <div id="fixedPriceSection" class="mt-3 d-none">
-                    <label for="fixedPriceAmount" class="form-label">Fixed Budget</label>
-                    <input type="number" class="form-control" id="fixedPriceAmount" name="fixedPriceAmount" step="0.01" min="0" placeholder="Enter fixed price in PHP">
-                    <p>Enter the total fixed price for the job.</p>
+                <div id="fixedPriceSection" class="mt-3" style="display: none;">
+                    <label for="fixedPriceAmount" class="form-label">Fixed Price</label>
+                    <input type="number" class="form-control" id="fixedPriceAmount" name="fixedPriceAmount" placeholder="e.g., 500">
+                    <p class="text-muted">Enter the total amount you're willing to pay for the entire project.</p>
                 </div>
             </div>
             <div class="d-flex justify-content-between">
@@ -176,104 +224,79 @@ if ($_SESSION['role'] != "Client2") {
                 <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
             </div>
         </div>
-        <!-- Final Step: Job Description -->
+
+        <!-- Step 5: Job Description -->
         <div class="step">
             <div class="mb-3">
                 <label for="jobDescription" class="form-label">Job Description</label>
-                <textarea class="form-control" id="jobDescription" name="jobDescription" rows="4" required></textarea>
-                <p>Provide a detailed description of the job responsibilities and requirements.</p>
-            </div>
-            <div class="mb-3">
-                <label for="qualifications" class="form-label">Qualifications</label>
-                <input type="text" class="form-control" id="qualifications" name="qualifications" required>
-                <p>List the qualifications and skills required for the job.</p>
+                <textarea class="form-control" id="jobDescription" name="jobDescription" rows="4" placeholder="Provide a detailed description of the job requirements."></textarea>
+                <p class="text-muted">Provide a detailed description of the job requirements.</p>
             </div>
             <div class="d-flex justify-content-between">
                 <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
-                <button type="button" class="btn btn-primary"onclick="jobpostingc()"><i class="fas fa-paper-plane"></i> Post Job</button>
+                <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 6: Qualifications -->
+        <div class="step">
+            <div class="mb-3">
+                <label for="qualifications" class="form-label">Qualifications</label>
+                <textarea class="form-control" id="qualifications" name="qualifications" rows="4" placeholder="List any specific qualifications or experience required for this job."></textarea>
+                <p class="text-muted">List any specific qualifications or experience required for this job.</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+                <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </div>
     </form>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
 <script>
+    $(document).ready(function() {
+        // Show alert message if exists
+        if ($('#alertMessage').length) {
+            $('#alertMessage').addClass('show');
+        }
+
+        $('#jobForm').on('submit', function() {
+            $('button[type="submit"]').attr('disabled', 'disabled').text('Submitting...');
+        });
+
+        $('input[name="paymentType"]').on('change', function() {
+            if ($(this).val() === 'hourly') {
+                $('#hourlyRateSection').show();
+                $('#fixedPriceSection').hide();
+            } else {
+                $('#hourlyRateSection').hide();
+                $('#fixedPriceSection').show();
+            }
+        });
+    });
+
     function nextStep() {
-        const steps = document.querySelectorAll('.step');
-        let activeIndex = Array.from(steps).findIndex(step => step.classList.contains('active'));
-        if (activeIndex < steps.length - 1) {
-            steps[activeIndex].classList.remove('active');
-            steps[activeIndex + 1].classList.add('active');
+        var currentStep = $('.step.active');
+        var nextStep = currentStep.next('.step');
+
+        if (nextStep.length) {
+            currentStep.removeClass('active');
+            nextStep.addClass('active');
         }
     }
 
     function prevStep() {
-        const steps = document.querySelectorAll('.step');
-        let activeIndex = Array.from(steps).findIndex(step => step.classList.contains('active'));
-        if (activeIndex > 0) {
-            steps[activeIndex].classList.remove('active');
-            steps[activeIndex - 1].classList.add('active');
+        var currentStep = $('.step.active');
+        var prevStep = currentStep.prev('.step');
+
+        if (prevStep.length) {
+            currentStep.removeClass('active');
+            prevStep.addClass('active');
         }
     }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const paymentTypeRadios = document.querySelectorAll('input[name="paymentType"]');
-        const hourlyRateSection = document.getElementById('hourlyRateSection');
-        const fixedPriceSection = document.getElementById('fixedPriceSection');
-
-        function updatePaymentSections() {
-            if (document.getElementById('paymentHourly').checked) {
-                hourlyRateSection.classList.remove('d-none');
-                fixedPriceSection.classList.add('d-none');
-            } else {
-                hourlyRateSection.classList.add('d-none');
-                fixedPriceSection.classList.remove('d-none');
-            }
-        }
-
-        paymentTypeRadios.forEach(radio => {
-            radio.addEventListener('change', updatePaymentSections);
-        });
-
-        // Initialize visibility based on the default selected radio button
-        updatePaymentSections();
-    });
-
-    function jobpostingc() {
-        var ccid = document.getElementById("ccid").value;
-    var jobTitle = document.getElementById("jobTitle").value;
-    var skills = document.getElementById("skills").value;
-    var jobnature = document.getElementById("jobnature").value;
-    var jobterm = document.getElementById("jobterm").value;
-    var paymentHourly = document.getElementById("paymentHourly").value;
-    var hourlyRateAmount = document.getElementById("hourlyRateAmount").value;
-    var fixedPriceAmount = document.getElementById("fixedPriceAmount").value;
-    var jobDescription = document.getElementById("jobDescription").value;
-    var qualifications = document.getElementById("qualifications").value;
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("notifforadd").innerHTML = this.responseText;
-
-            // Apply fade-out effect after 2 seconds
-            setTimeout(function() {
-                var notif = document.querySelector("#notifforadd .alert");
-                if (notif) {
-                    notif.classList.add("fade-out");
-                    location.reload();
-                    // Remove the notification from the DOM after the fade-out animation
-                    setTimeout(function() {
-                        notif.remove();
-                    }, 1000); // Matches the CSS transition duration
-                }
-            }, 2000);
-        }
-    }
-    xhttp.open("GET", "../ajax/jobposting-ajax_copy.php?ccid=" + ccid + "&&jobTitle=" + jobTitle + "&&skills=" + skills + "&&jobnature=" + jobnature + "&&jobterm=" + jobterm + "&&paymentHourly=" + paymentHourly + "&&hourlyRateAmount=" + hourlyRateAmount + "&&fixedPriceAmount=" + fixedPriceAmount + "&&jobDescription=" + jobDescription + "&&qualifications=" + qualifications, true);
-    xhttp.send();
-}
 </script>
 
-<script src="../bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

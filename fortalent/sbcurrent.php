@@ -20,7 +20,7 @@ $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Dashboard</title>
+    <title>Talent Jobs</title>
     <link href="../bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="../fontawesome-free-6.2.0-web/css/all.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../images/fvlogo.png">
@@ -79,7 +79,7 @@ $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="client.php"><i class="fas fa-arrow-left"></i> Back</a>
+                    <a class="nav-link" href="talent.php"><i class="fas fa-arrow-left"></i> Back</a>
                 </li>
             </ul>
         </div>

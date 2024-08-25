@@ -72,7 +72,7 @@ $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
 <body onload="displayjobsfccopy()">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Client Portal</a>
+        <a class="navbar-brand" href="client.php">Client Portal</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

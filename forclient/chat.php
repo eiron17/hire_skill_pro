@@ -1,6 +1,6 @@
 <?php
 session_start();
-$myid = $_SESSION['uid'];
+$myid = $_SESSION['idn'];
 $recieverid = $_GET['reciever'];
 include_once '../Class/user.php';
 $u = new User();
@@ -124,7 +124,7 @@ while ($row = $acc->fetch_assoc()) {
 </head>
 <body>
     <div class="chat-container">
-    <a href="client.php">Back</a>
+    <a href="clientinprogress.php">Back</a>
         <div class="chat-header"><?= $fn;?></div>
         <div class="chat-box" id="chat-box"></div>
         <div class="chat-input-container">

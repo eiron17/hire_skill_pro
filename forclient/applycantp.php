@@ -17,8 +17,19 @@ $myprofile = $u->selectstatus($ggtid,$jobid);
         include_once '../Class/User.php';
         $u = new User();
         echo $u->updatestatushando($pggtid,$pjobid);
+        echo "<script>window.location.href = 'client.php';</script>";
         }
-  
+        else if (isset($_POST['dyes'])){
+
+            $dpggtid = $_POST['dtjid'];
+            $dpjobid =$_POST['djid'];
+    
+            
+            include_once '../Class/User.php';
+            $u = new User();
+            echo $u->dupdatestatushando($dpggtid,$dpjobid);
+            echo "<script>window.location.href = 'client.php';</script>";
+            }
 }
 ?>
 <!DOCTYPE html>
@@ -73,7 +84,7 @@ $myprofile = $u->selectstatus($ggtid,$jobid);
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand ms-5" href="client.php">Job Portal</a>
+            <a class="navbar-brand ms-5" href="#">Job Portal</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -145,13 +156,12 @@ $myprofile = $u->selectstatus($ggtid,$jobid);
             ?>
 
             <div class="button-container">
-                <button type="button" class="btn btn-success" onclick="">Chat</button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal5" onclick="">Hire</button>
-                <button type="button" class="btn btn-danger" onclick="">Decline</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal5" onclick="">Accept</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#largeModal6"onclick="">Decline</button>
             </div>
         </div>
 <form method="POST">
-            <!-- Large Modal -->
+            <!-- accept modal -->
 <div class="modal fade" id="largeModal5" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm">
     <div class="modal-content">
@@ -179,6 +189,37 @@ $myprofile = $u->selectstatus($ggtid,$jobid);
   </div>
 </div>
 </form>
+
+<form method="POST">
+            <!-- decline modal -->
+<div class="modal fade" id="largeModal6" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="largeModalLabel">Decline Talent</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Modal Body Content -->
+       <input type="hidden" name="dtjid" value="<?=$ggtid?>">
+       <input type="hidden" name="djid" value="<?=$jobid?>">
+       <input type="hidden" name="tstatus" value="<?=$tstatus?>">
+       <input type="hidden" name="pstatus" value="<?=$pstatus?>">
+       <p>Want to Decline this Talent?</p>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" name="dyes" class="btn btn-primary">Yes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
 
 
     </div>

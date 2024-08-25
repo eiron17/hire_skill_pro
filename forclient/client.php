@@ -10,7 +10,7 @@ if ($_SESSION['role'] != "Client2") {
 }
 
 $cidd = $_SESSION['idn'];
-include('Databases.php'); // Ensure this file connects to your database
+include('Database.php'); // Ensure this file connects to your database
 
 // Get the job_id from query parameter (if available)
 $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;

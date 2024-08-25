@@ -2,9 +2,11 @@
 session_start();
 if (!isset($_SESSION['idn'])) {
     header('location:../logout.php');
+    exit();
 }
 if ($_SESSION['role'] != "Talent") {
     header('location:../index.php');
+    exit();
 }
 
 include('Database.php'); // Ensure this file connects to your database
@@ -39,22 +41,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $percentage >= 80 ? 'Passed' : 'Failed';
 
     // Assuming user ID is stored in a session or passed through a form
-    $userId = $_SESSION['user_id'] ?? 1; // replace with your user identification method
+    $userId = $_SESSION['idn'] ?? 1; // Replace with your user identification method
 
     // Prepare SQL query to update the database
-    $sql = "UPDATE tblinfo SET q1 = ?, q2 = ?, q3 = ?, result = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssssi', $q1, $q2, $q3, $result, $userId);
+    $sql = "UPDATE tblinfo SET q1 = ?, q2 = ?, q3 = ?, result = ? WHERE idnumber = ?";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('sssss', $q1, $q2, $q3, $result, $userId);
 
-    if ($stmt->execute()) {
-        $showResult = true;
-        $resultText = "You got $percentage% correct. You have $result.";
-        $showModal = true;
+        if ($stmt->execute()) {
+            $showResult = true;
+            $resultText = "You got $percentage% correct. You have $result.";
+            $showModal = true;
+        } else {
+            $resultText = "Error updating record: " . $stmt->error;
+        }
+
+        $stmt->close();
     } else {
-        $resultText = "Error updating record: " . $stmt->error;
+        $resultText = "Error preparing statement: " . $conn->error;
     }
 
-    $stmt->close();
     $conn->close();
 }
 ?>
@@ -158,63 +164,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="completionModal" tabindex="-1" aria-labelledby="completionModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-center">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="completionModalLabel">Profile Setup Completed</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    You have completed setting up your profile. Proceed to re-login.
-                </div>
-                <div class="modal-footer">
-                    <a href="../login.php" class="btn btn-primary">Re-login</a>
+    <?php if ($showModal): ?>
+        <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="resultModalLabel">Quiz Results</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <?php echo htmlspecialchars($resultText); ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
 
-    <script>
-        function checkAnswers() {
-            // Correct answers for Mathematics Test
-            const correctAnswers = ['12', '8', '24'];
-
-            // Get user answers for Mathematics Test
-            const mathAnswers = [
-                document.getElementById('math-question1').value.trim(),
-                document.getElementById('math-question2').value.trim(),
-                document.getElementById('math-question3').value.trim()
-            ];
-
-            // Calculate score
-            let totalQuestions = correctAnswers.length;
-            let correctCount = 0;
-
-            mathAnswers.forEach((answer, index) => {
-                if (answer === correctAnswers[index]) {
-                    correctCount++;
-                }
-            });
-
-            // Calculate percentage
-            let percentage = (correctCount / totalQuestions) * 100;
-            let resultText = percentage >= 80 ? 'Passed' : 'Failed';
-
-            // Display result
-            document.getElementById('result-text').innerText = `You got ${percentage}% correct. You have ${resultText}.`;
-            document.getElementById('result').classList.remove('d-none');
-        }
-
-        // Show modal if form is submitted and result is available
-        <?php if ($showModal): ?>
-        document.addEventListener('DOMContentLoaded', function () {
-            var completionModal = new bootstrap.Modal(document.getElementById('completionModal'));
-            completionModal.show();
-        });
-        <?php endif; ?>
-    </script>
     <script src="../bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Display the result modal if needed
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php if ($showModal): ?>
+                var resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+                resultModal.show();
+            <?php endif; ?>
+        });
+    </script>
 </body>
 </html>

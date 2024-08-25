@@ -155,11 +155,6 @@ $uid=$_SESSION['idn'];
                                 <i class="fas fa-clipboard-list"></i> Exam Management
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sbpmethod.php">
-                                <i class="fas fa-money-bill-wave"></i> Payment Management
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </nav>
