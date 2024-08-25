@@ -2,7 +2,7 @@
 session_start();
 $myid = $_SESSION['idn'];
 $recieverid = $_GET['reciever'];
-include_once '../Class/user.php';
+include_once '../Class/User.php';
 $u = new User();
 $acc = $u->chat($recieverid);
 while ($row = $acc->fetch_assoc()) {
