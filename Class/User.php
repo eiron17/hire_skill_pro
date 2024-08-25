@@ -1,6 +1,6 @@
 <?php
-include_once 'Database.php';
-Class User extends Database{
+include_once 'Databases.php';
+Class User extends Databases{
 
     /* login */
     public function login($un, $pw){
