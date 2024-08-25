@@ -124,4 +124,3 @@ $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
     </script>
 </body>
 </html>
-s
