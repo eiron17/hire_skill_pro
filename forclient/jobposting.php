@@ -44,9 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         // Database connection
         $servername = 'localhost';
-        $username = 'root'; // Update this
-        $password = ''; // Update this
-        $dbname = 'hireskillpro';
+        $username = 'u320585682_hireskillpro'; // Update this
+        $password = 'Mydatabase17'; // Update this
+        $dbname = 'u320585682_hireskillpro';
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
