@@ -299,20 +299,10 @@ Class User extends Databases{
                 WHERE id = '$pjobid';
             ";
         
-            // Delete from tblapply
-            $sql3 = "
-                DELETE FROM tblapply 
-                WHERE talent_id = '$pggtid' AND job_id = '$pjobid';
-            ";
-        
             // Execute queries
             if ($this->conn->query($sql1)) {
                 if ($this->conn->query($sql2)) {
-                    if ($this->conn->query($sql3)) {
-                        return "<script>alert('Hired and Record Deleted');</script>"; 
-                    } else {
-                        return $this->conn->error; 
-                    }
+                    return "<script>alert('Hired successfully');</script>"; 
                 } else {
                     return $this->conn->error; 
                 }
@@ -321,7 +311,6 @@ Class User extends Databases{
             }
         }
         
-
         public function dupdatestatushando($dpggtid, $dpjobid) {
             // Update status in tblinfo
             $sql3 = "
@@ -337,20 +326,10 @@ Class User extends Databases{
                 WHERE id = '$dpjobid';
             ";
         
-            // Delete from tblapply
-            $sql5 = "
-                DELETE FROM tblapply 
-                WHERE talent_id = '$dpggtid' AND job_id = '$dpjobid';
-            ";
-        
             // Execute queries
             if ($this->conn->query($sql3)) {
                 if ($this->conn->query($sql4)) {
-                    if ($this->conn->query($sql5)) {
-                        return "<script>alert('Decline and Delete Successful');</script>"; 
-                    } else {
-                        return $this->conn->error; 
-                    }
+                    return "<script>alert('Declined successfully');</script>"; 
                 } else {
                     return $this->conn->error; 
                 }
@@ -385,10 +364,7 @@ Class User extends Databases{
         
             $data = $this->conn->query($sql);
             return $data;
-        }
-        
-        
-        
+        }     
         
         public function apllicantnotiffcc($job_id) {
             $sql = "
