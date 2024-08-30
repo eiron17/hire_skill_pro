@@ -1,6 +1,6 @@
 <?php
-include_once 'Databases.php';
-Class User extends Databases{
+include_once 'Database.php';
+Class User extends Database{
 
     /* login */
     public function login($un, $pw){
@@ -165,6 +165,12 @@ Class User extends Databases{
             $data = $this->conn->query($sql);
             return $data;
         }
+        public function comtransac(){
+            $sql = "SELECT transaction_id, amount, currency, payment_status, created_at, id_number, receiver_id, commission
+            FROM transactions";
+            $data = $this->conn->query($sql);
+            return $data;
+        }
 
         public function tviewjobdeatils($jobid){
             $sql = "SELECT * FROM tblposting where id='$jobid'";
@@ -176,6 +182,14 @@ Class User extends Databases{
             $sql="insert into tblapply values(NULL,'$uidd','$jobid','$clientid',current_timestamp())";
             if($this->conn->query($sql)==true){
                 return'';
+            }else{
+                return $this->conn->error;
+            }
+        }
+        public function updatejobasdone($jid){
+            $sql= "UPDATE tblposting SET status = 'Done' WHERE id = '$jid'";
+            if($this->conn->query($sql)==true){
+                return 'Update Success!';
             }else{
                 return $this->conn->error;
             }
@@ -302,7 +316,7 @@ Class User extends Databases{
             // Execute queries
             if ($this->conn->query($sql1)) {
                 if ($this->conn->query($sql2)) {
-                    return "<script>alert('Hired successfully');</script>"; 
+                    return "<script>alert('Hired and Status Updated');</script>"; 
                 } else {
                     return $this->conn->error; 
                 }
@@ -311,6 +325,8 @@ Class User extends Databases{
             }
         }
         
+        
+
         public function dupdatestatushando($dpggtid, $dpjobid) {
             // Update status in tblinfo
             $sql3 = "
@@ -329,7 +345,7 @@ Class User extends Databases{
             // Execute queries
             if ($this->conn->query($sql3)) {
                 if ($this->conn->query($sql4)) {
-                    return "<script>alert('Declined successfully');</script>"; 
+                    return "<script>alert('Update Successful');</script>"; 
                 } else {
                     return $this->conn->error; 
                 }
@@ -337,6 +353,7 @@ Class User extends Databases{
                 return $this->conn->error; 
             }
         }
+        
         
         
         public function selectstatus($ggtid,$jobid){
@@ -359,12 +376,10 @@ Class User extends Databases{
         LEFT JOIN tblinfo i ON a.talent_id = i.idnumber 
         WHERE p.client_idnumber = '$cid' 
         AND p.status = 'inprogress'
-        AND i.status = 'hired'
-        GROUP BY p.id";
-        
+        AND i.status = 'hired'";
             $data = $this->conn->query($sql);
             return $data;
-        }     
+        }
         
         public function apllicantnotiffcc($job_id) {
             $sql = "

@@ -10,10 +10,19 @@ if ($_SESSION['role'] != "Client2") {
 }
 
 $cidd = $_SESSION['idn'];
-include('Database.php'); // Ensure this file connects to your database
+// include('Database.php'); // Ensure this file connects to your database
 
 // Get the job_id from query parameter (if available)
-$job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
+// $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
+include_once '../Class/User.php';
+$u = new User();
+if(isset($_POST['btnsubmit'])){
+    $jid = $_POST['jobid'];
+    echo '<script>
+        alert("'.$u -> updatejobasdone($jid).'")
+    </script>';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,25 +97,29 @@ $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
 
 <div class="row m-5" id="response"></div>
 <input type="hidden" id="cid" value="<?= htmlspecialchars($cidd); ?>">
+
+<form method="POST">
     <!-- Large Modal -->
-    <div class="modal fade" id="largeModal" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal fade" id="markdone" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="largeModalLabel">Large Modal Title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Modal Body Content -->
-                    <p>Your content goes here. You can add text, images, forms, and more.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h1>Mark as Done?</h1>
+                <input type="text" id="jid" name="jobid">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="btnsubmit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
             </div>
         </div>
     </div>
+</form>
+  
 
     <script src="../bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -138,6 +151,12 @@ $job_id = isset($_GET['job_id']) ? $_GET['job_id'] : null;
 
         function chat(uid){
             window.open("chat.php?reciever=" + uid,"_self");
+        }
+        function updatejobstatus(jid){
+            document.getElementById("jid").value = jid;
+        }
+        function payment(tid, jt, hnf, hnl){
+            window.open("paymentofclient.php?reciever=" + tid +"&&jt=" + jt + "&&hnf=" + hnf + "&&hnl=" + hnl,"_new");
         }
     </script>
 </body>
