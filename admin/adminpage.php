@@ -10,10 +10,10 @@ if ($_SESSION['role'] != "Admin") {
 }
 
 // Include your database connection
-require_once '../Class/Databases.php';
+require_once '../Class/Database.php';
 
 // Create an instance of your database class
-$db = new Databases();
+$db = new Database();
 
 // SQL query to count the total number of projects with status 'inprogress'
 $query_inprogress = "SELECT COUNT(*) AS total_inprogress_projects FROM tblposting WHERE status = 'inprogress'";
@@ -222,30 +222,40 @@ if ($result_open->num_rows > 0) {
                                             <tr>
                                                 <th scope="col">Payment ID</th>
                                                 <th scope="col">Amount</th>
+                                                <th scope="col">Paid to Talent</th>
+                                                <th scope="col">Commision</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Date</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>001</td>
-                                                <td>$500</td>
-                                                <td><span class="badge bg-success">Completed</span></td>
-                                                <td>2024-07-20</td>
-                                            </tr>
-                                            <tr>
-                                                <td>002</td>
-                                                <td>$1,000</td>
-                                                <td><span class="badge bg-warning">Pending</span></td>
-                                                <td>2024-07-22</td>
-                                            </tr>
-                                            <tr>
-                                                <td>003</td>
-                                                <td>$250</td>
-                                                <td><span class="badge bg-danger">Failed</span></td>
-                                                <td>2024-07-25</td>
-                                            </tr>
-                                        </tbody>
+                                        <?php
+                                        include_once '../Class/User.php';
+                                        $u = new User();
+                                        $displaytransac = $u->comtransac();
+                                        while($row = $displaytransac->fetch_assoc()){
+                                            $amount = $row['amount']+$row['commission'];
+                                            if($row['payment_status'] == 'COMPLETED'){
+                                                $badge = 'badge bg-success';
+                                                $txt = 'text-success';
+                                            }else{
+                                                $badge = 'badge bg-danger';
+                                                $txt = 'text-danger';
+                                            }
+                                            echo '
+                                             <tbody>
+                                                <tr>
+                                                    <td>'.$row['transaction_id'].'</td>
+                                                    <td>'.$amount.'</td>
+                                                    <td>'.$row['amount'].'</td>
+                                                    <td class="'.$txt.'">'.$row['commission'].'</td>
+                                                    <td><span class="'.$badge.'">'.$row['payment_status'].'</span></td>
+                                                    <td>'.$row['created_at'].'</td>
+                                                </tr>
+                                            </tbody>
+                                            
+                                            ';
+                                        }
+                                        ?>
                                     </table>
                                 </div>
                             </div>

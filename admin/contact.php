@@ -9,9 +9,9 @@ if ($_SESSION['role'] != "Admin") {
     exit();
 }
 
-require_once '../Class/Databases.php'; // Ensure you have your database connection
+require_once '../Class/Database.php'; // Ensure you have your database connection
 
-$db = new Databases();
+$db = new Database();
 $conn = $db->conn;
 
 // Enable error reporting
@@ -88,8 +88,8 @@ $conn->close();
                 <div class="position-sticky">
                     <h1><i class="fa-solid fa-arrow-right sidebar-toggle-icon d-md-none" id="sidebarToggle"></i></h1>
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="adminpage.php">
+                    <li class="nav-item">
+                            <a class="nav-link active" href="adminpage.php">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard 
                             </a>
                         </li>
@@ -105,13 +105,13 @@ $conn->close();
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link active" href="contact.php">
-                                <i class="fas fa-envelope"></i> User Messages
+                            <a class="nav-link" href="contact.php">
+                                <i class="fas fa-money-check"></i> User Messages
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="feeback.php">
-                                <i class="fas fa-comments"></i> Feedback
+                                <i class="fas fa-money-check"></i> Feedback
                             </a>
                         </li>
                         <li class="nav-item">

@@ -5,6 +5,7 @@
             <th class="border">Job Id</th>
             <th class="border">Job Title</th>
             <th class="border">Job Terms</th>
+            <th class="border">Job Status</th>
             <th class="border">Project Budget</th>
             <th class="border text-center">Applicant</th>
         </tr>
@@ -23,6 +24,7 @@ while ($row = $data->fetch_assoc()) {
             <td class="border">'.$row['id'].'</td>
             <td class="border ">'.$row['job_title'].'</td>
             <td class="border ">'.$row['job_term'].'</td>
+            <td class="border ">'.$row['status'].'</td>
             <td class="border "><span class="fw-bold">Fixed Price:</span> '.$row['fixed_price'].' <span class="fw-bold">Hourly Rate:</span> '.$row['hourly_rate'].'</td>
     
             <td class="border text-center">

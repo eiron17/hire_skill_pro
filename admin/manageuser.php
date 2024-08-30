@@ -1,21 +1,6 @@
 <?php
-include_once '../Class/Databases.php'; // Ensure this path is correct
+include_once '../Class/Database.php'; // Ensure this path is correct
 include_once '../Class/User.php';
-
-// Initialize notification message
-$notification = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['block_id'])) {
-    $id = intval($_POST['block_id']);
-    $u = new User();
-    $result = $u->blockUser($id);
-    
-    if ($result) {
-        $notification = '<div class="alert alert-success" role="alert">User blocked successfully!</div>';
-    } else {
-        $notification = '<div class="alert alert-danger" role="alert">Error blocking user.</div>';
-    }
-}
 
 ?>
 
@@ -128,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['block_id'])) {
                 <div class="position-sticky">
                     <h1><i class="fa-solid fa-arrow-right sidebar-toggle-icon d-md-none" id="sidebarToggle"></i></h1>
                     <ul class="nav flex-column">
-                        <li class="nav-item">
+                    <li class="nav-item">
                             <a class="nav-link active" href="adminpage.php">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard 
                             </a>
@@ -143,9 +128,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['block_id'])) {
                                 <i class="fas fa-project-diagram"></i> Projects
                             </a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-money-check"></i> Payments
+                            <a class="nav-link" href="contact.php">
+                                <i class="fas fa-money-check"></i> User Messages
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="feeback.php">
+                                <i class="fas fa-money-check"></i> Feedback
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="transaction.php">
+                                <i class="fas fa-comments"></i> Transaction
                             </a>
                         </li>
                     </ul>

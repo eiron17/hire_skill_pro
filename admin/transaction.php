@@ -64,8 +64,8 @@ if ($_SESSION['role'] != "Admin") {
                 <div class="position-sticky">
                     <h1><i class="fa-solid fa-arrow-right sidebar-toggle-icon d-md-none" id="sidebarToggle"></i></h1>
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="adminpage.php">
+                    <li class="nav-item">
+                            <a class="nav-link active" href="adminpage.php">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard 
                             </a>
                         </li>
@@ -79,14 +79,15 @@ if ($_SESSION['role'] != "Admin") {
                                 <i class="fas fa-project-diagram"></i> Projects
                             </a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link active" href="contact.php">
-                                <i class="fas fa-envelope"></i> User Messages
+                            <a class="nav-link" href="contact.php">
+                                <i class="fas fa-money-check"></i> User Messages
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="feeback.php">
-                                <i class="fas fa-comments"></i> Feedback
+                                <i class="fas fa-money-check"></i> Feedback
                             </a>
                         </li>
                         <li class="nav-item">
@@ -122,6 +123,13 @@ if ($_SESSION['role'] != "Admin") {
                                     </thead>
                                     <tbody>
                                         <?php
+                                        $servername = "localhost"; // Change if necessary
+                                        $username = "root"; // Change if necessary
+                                        $password = ""; // Change if necessary
+                                        $database = "hireskillpro"; // Make sure this matches the database name
+                                        
+                                        // Create connection
+                                        $conn = new mysqli($servername, $username, $password, $database);
                                         // Fetch data from the transactions table
                                         $sql = "SELECT id, transaction_id, payer_name, amount, currency, payment_status, created_at FROM transactions";
                                         $result = $conn->query($sql);

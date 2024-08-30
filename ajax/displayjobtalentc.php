@@ -9,7 +9,6 @@
             <th class="border">Project Status</th>
             <th class="border">Employer</th>
             <th class="border text-center">Chat</th>
-            <th class="border text-center">Marked Dode</th>
         </tr>
         </thead>
         <tbody>
@@ -31,11 +30,6 @@ while ($row = $data->fetch_assoc()) {
             <td class="border text-center">
                 <button type="button" onclick="chat(&quot;'.$row['clientid'].'&quot;)" class="btn shadow-none text-dark position-relative m-2">
                 <i class="fa-solid fa-comments"></i>
-                </button>
-            </td>
-            <td>            
-            <button type="button" class="btn shadow-none text-dark position-relative m-2">
-             <i class="fa-solid fa-check"></i>
                 </button>
             </td>
         </tr>

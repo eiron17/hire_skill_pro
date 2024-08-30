@@ -117,7 +117,7 @@ if ($_SESSION['role'] != "Admin") {
                 <div class="position-sticky">
                     <h1><i class="fa-solid fa-arrow-right sidebar-toggle-icon d-md-none" id="sidebarToggle"></i></h1>
                     <ul class="nav flex-column">
-                        <li class="nav-item">
+                    <li class="nav-item">
                             <a class="nav-link active" href="adminpage.php">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard 
                             </a>
@@ -132,13 +132,14 @@ if ($_SESSION['role'] != "Admin") {
                                 <i class="fas fa-project-diagram"></i> Projects
                             </a>
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">
                                 <i class="fas fa-money-check"></i> User Messages
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="feedback.php">
+                            <a class="nav-link" href="feeback.php">
                                 <i class="fas fa-money-check"></i> Feedback
                             </a>
                         </li>
