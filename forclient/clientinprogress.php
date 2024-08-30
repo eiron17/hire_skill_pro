@@ -109,7 +109,7 @@ if(isset($_POST['btnsubmit'])){
             </div>
             <div class="modal-body">
                 <h1>Mark as Done?</h1>
-                <input type="text" id="jid" name="jobid">
+                <input type="hidden" id="jid" name="jobid">
             </div>
             <div class="modal-footer">
                 <button type="submit" name="btnsubmit" class="btn btn-primary">Save</button>
