@@ -60,54 +60,7 @@ if ($_SESSION['role'] != "Talent") {
         <h2 class="mb-4 text-center">Talent Dashboard</h2>
         <div class="row">
             <!-- Payment Management -->
-            <div class="col-12 mb-4">
-                <div class="card border-primary" style="min-height: 500px;">
-                    <div class="card-header bg-primary text-white">
-                        <h5>Payment Management</h5>
-                    </div>
-                    <div class="card-body bg-white text-dark">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Plan</th>
-                                    <th>Type</th>
-                                    <th>Job Status</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Payment Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Example Data -->
-                                <tr>
-                                    <td>Basic</td>
-                                    <td>One-Time</td>
-                                    <td>Completed</td>
-                                    <td>01/01/2024</td>
-                                    <td>01/31/2024</td>
-                                    <td>Paid</td>
-                                </tr>
-                                <tr>
-                                    <td>Premium</td>
-                                    <td>Subscription</td>
-                                    <td>Ongoing</td>
-                                    <td>02/01/2024</td>
-                                    <td>02/28/2024</td>
-                                    <td>Pending</td>
-                                </tr>
-                                <tr>
-                                    <td>Standard</td>
-                                    <td>One-Time</td>
-                                    <td>In Progress</td>
-                                    <td>03/01/2024</td>
-                                    <td>03/31/2024</td>
-                                    <td>Unpaid</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+       
         </div>
     </div>
 
