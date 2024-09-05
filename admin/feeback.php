@@ -9,7 +9,7 @@ if ($_SESSION['role'] != "Admin") {
     exit();
 }
 
-require_once '../Class/Database.php'; // Ensure you have your database connection
+require_once '../Class/Databases.php'; // Ensure you have your database connection
 
 $db = new Database();
 $conn = $db->conn;

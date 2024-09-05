@@ -10,7 +10,7 @@ if ($_SESSION['role'] != "Admin") {
 }
 
 // Include your database connection
-require_once '../Class/Database.php';
+require_once '../Class/Databases.php';
 
 // Create an instance of your database class
 $db = new Database();
