@@ -11,7 +11,7 @@ if ($_SESSION['role'] != "Admin") {
 
 require_once '../Class/Databases.php'; // Ensure you have your database connection
 
-$db = new Database();
+$db = new Databases();
 $conn = $db->conn;
 
 // Enable error reporting
