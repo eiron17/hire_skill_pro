@@ -13,7 +13,7 @@ if ($_SESSION['role'] != "Admin") {
 require_once '../Class/Databases.php';
 
 // Create an instance of your database class
-$db = new Database();
+$db = new Databases();
 
 // SQL query to count the total number of projects with status 'inprogress'
 $query_inprogress = "SELECT COUNT(*) AS total_inprogress_projects FROM tblposting WHERE status = 'inprogress'";
